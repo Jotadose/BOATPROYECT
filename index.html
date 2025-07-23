@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre del Barco - Alquiler y Experiencias Náuticas</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos (Heroicons) -->
+    <script src="https://unpkg.com/heroicons@2.1.3/24/outline/index.js"></script>
+
+    <style>
+        /* Estilo para la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Efecto de superposición oscuro para la imagen principal */
+        .hero-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        /* Asegura que el contenido del hero esté sobre la superposición */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        /* Animación suave para los enlaces del nav */
+        nav a {
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- =========== Header y Navegación =========== -->
+    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold text-blue-800">
+                Tu Barco
+            </a>
+            <!-- Menú para escritorio -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-blue-600">Sobre el Barco</a>
+                <a href="#gallery" class="text-gray-600 hover:text-blue-600">Galería</a>
+                <a href="#experiences" class="text-gray-600 hover:text-blue-600">Experiencias</a>
+                <a href="#contact" class="text-blue-600 hover:text-blue-600 font-semibold">Contacto</a>
+            </div>
+            <!-- Botón de reserva -->
+            <a href="#contact" class="hidden md:block bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors">
+                SOLICITAR RESERVA
+            </a>
+            <!-- Menú para móvil (botón) -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Menú desplegable para móvil -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">Sobre el Barco</a>
+            <a href="#gallery" class="block py-2 text-gray-600 hover:text-blue-600">Galería</a>
+            <a href="#experiences" class="block py-2 text-gray-600 hover:text-blue-600">Experiencias</a>
+            <a href="#contact" class="block py-2 text-blue-600 font-semibold">Contacto</a>
+            <a href="#contact" class="mt-4 block w-full text-center bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors">
+                SOLICITAR RESERVA
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========== Sección Principal (Hero) =========== -->
+        <section class="relative h-[60vh] md:h-[80vh] bg-cover bg-center hero-overlay" style="background-image: url('https://placehold.co/1920x1080/334155/white?text=Imagen+Espectacular+del+Barco');">
+            <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center hero-content">
+                <h1 class="text-white text-4xl md:text-6xl font-bold leading-tight mb-4">Vive una Experiencia Inolvidable</h1>
+                <p class="text-gray-200 text-lg md:text-xl max-w-2xl">Descubre la costa desde una perspectiva única a bordo de nuestra exclusiva embarcación.</p>
+            </div>
+        </section>
+
+        <!-- =========== Sección Sobre el Barco =========== -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Nuestra Embarcación</h2>
+                    <p class="text-gray-600 mt-2 text-lg">Comodidad, seguridad y elegancia en cada detalle.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://placehold.co/800x600/e2e8f0/334155?text=Foto+Interior+del+Barco" alt="Interior del barco" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Un Diseño Pensado para Ti</h3>
+                        <p class="text-gray-600 mb-4">
+                            Aquí puedes describir tu barco. Por ejemplo: "Nuestro yate modelo [Modelo del Barco] de [Año] combina un diseño moderno con todas las comodidades necesarias para una jornada perfecta en el mar. Con capacidad para [Número] pasajeros, es ideal para salidas familiares, eventos corporativos o celebraciones especiales."
+                        </p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Amplia cubierta con solárium</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Salón interior climatizado</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Equipo de música Bluetooth</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Equipamiento completo de seguridad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Sección Galería =========== -->
+        <section id="gallery" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Momentos a Bordo</h2>
+                    <p class="text-gray-600 mt-2 text-lg">Imagina tu próxima aventura con nosotros.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <img src="https://placehold.co/600x400/94a3b8/white?text=Galería+1" alt="Imagen de la galería 1" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://placehold.co/600x400/64748b/white?text=Galería+2" alt="Imagen de la galería 2" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://placehold.co/600x400/475569/white?text=Galería+3" alt="Imagen de la galería 3" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://placehold.co/600x400/334155/white?text=Galería+4" alt="Imagen de la galería 4" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+                </div>
+            </div>
+        </section>
+        
+        <!-- =========== Sección Experiencias =========== -->
+        <section id="experiences" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Nuestras Experiencias</h2>
+                    <p class="text-gray-600 mt-2 text-lg">Tours y paquetes diseñados para todos los gustos.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Experiencia 1 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
+                        <h3 class="text-xl font-bold text-blue-800 mb-2">Paseo por la Costa</h3>
+                        <p class="text-gray-600">Un tour de 4 horas para descubrir las calas y playas más hermosas de la zona. Incluye bebidas y snacks.</p>
+                    </div>
+                    <!-- Experiencia 2 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
+                        <h3 class="text-xl font-bold text-blue-800 mb-2">Atardecer Mágico</h3>
+                        <p class="text-gray-600">Disfruta de una puesta de sol inolvidable desde el mar con una copa de cava. La experiencia más romántica.</p>
+                    </div>
+                    <!-- Experiencia 3 -->
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
+                        <h3 class="text-xl font-bold text-blue-800 mb-2">Alquiler Privado</h3>
+                        <p class="text-gray-600">Reserva el barco en exclusiva para tu grupo. Diseñamos un plan a tu medida para un día perfecto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =========== Sección Contacto y Reservas =========== -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-200">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Contacta con Nosotros</h2>
+                    <p class="text-gray-600 mt-2 text-lg">Envíanos tu consulta y te responderemos a la brevedad.</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-2xl">
+                    <form id="contact-form">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Nombre -->
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nombre Completo</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <!-- Email -->
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <!-- Teléfono -->
+                            <div>
+                                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Teléfono</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <!-- Tipo de consulta -->
+                            <div>
+                                <label for="enquiry" class="block text-sm font-semibold text-gray-700 mb-1">Tipo de Consulta</label>
+                                <select id="enquiry" name="enquiry" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                    <option>Información General</option>
+                                    <option>Reserva para Evento Privado</option>
+                                    <option>Consulta sobre Tour</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+                            <!-- Número de Pasajeros -->
+                            <div>
+                                <label for="guests" class="block text-sm font-semibold text-gray-700 mb-1">Número de Pasajeros (aprox.)</label>
+                                <input type="number" id="guests" name="guests" min="1" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <!-- Fecha preferida -->
+                            <div>
+                                <label for="date" class="block text-sm font-semibold text-gray-700 mb-1">Fecha Preferida</label>
+                                <input type="date" id="date" name="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                        <!-- Mensaje -->
+                        <div class="mt-6">
+                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Cuéntanos más sobre lo que necesitas..."></textarea>
+                        </div>
+                        <!-- Botón de envío -->
+                        <div class="mt-8 text-center">
+                            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-md font-bold text-lg hover:bg-blue-700 transition-colors w-full md:w-auto">
+                                Enviar Solicitud
+                            </button>
+                        </div>
+                    </form>
+                    <div id="form-message" class="mt-4 text-center"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========== Footer =========== -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="font-bold text-xl mb-2">Nombre del Barco</p>
+            <p class="text-gray-400">© 2025. Todos los derechos reservados.</p>
+            <p class="text-gray-400 mt-2">Ubicado en [Ciudad/Puerto], [País]</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Script para el menú móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Script para el envío del formulario (simulado) ---
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Previene el envío real del formulario
+
+            // Simulación de envío
+            formMessage.textContent = 'Enviando...';
+            formMessage.className = 'mt-4 text-center text-blue-600';
+
+            setTimeout(() => {
+                // Muestra un mensaje de éxito
+                formMessage.textContent = '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.';
+                formMessage.className = 'mt-4 text-center text-green-600 font-semibold';
+                
+                // Limpia el formulario
+                contactForm.reset();
+
+                // Oculta el mensaje después de 5 segundos
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                }, 5000);
+
+            }, 2000);
+        });
+
+        // --- Script para el scroll suave ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Oculta el menú móvil si está abierto
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
