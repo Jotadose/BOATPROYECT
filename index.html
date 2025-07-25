@@ -3,285 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre del Barco - Alquiler y Experiencias Náuticas</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Iconos (Heroicons) -->
-    <script src="https://unpkg.com/heroicons@2.1.3/24/outline/index.js"></script>
-
+    <title>Palelu SpA - Sabor Gourmet en tu Estadio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilo para la fuente Inter */
+        /* Estilos personalizados para la paleta de colores y tipografía */
+        :root {
+            --primary-dark: #1a1a1a; /* Negro muy oscuro para fondos */
+            --secondary-gray: #333333; /* Gris oscuro para secciones */
+            --accent-gold: #D4AF37; /* Dorado vibrante para acentos */
+            --accent-red: #E21B35; /* Rojo vibrante para la pasión deportiva */
+            --text-light: #f3f4f6; /* Texto claro */
+        }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            background-color: var(--primary-dark);
+            scroll-behavior: smooth; /* Desplazamiento suave para la navegación */
         }
-        /* Efecto de superposición oscuro para la imagen principal */
-        .hero-overlay::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold); /* Títulos en dorado para un toque premium */
         }
-        /* Asegura que el contenido del hero esté sobre la superposición */
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .bg-hero {
+            background-image: url('https://images.unsplash.com/photo-1626079930722-19e0ac10d7a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto parallax */
         }
-        /* Animación suave para los enlaces del nav */
-        nav a {
-            transition: color 0.3s ease;
+        .bg-overlay-dark {
+            background-color: rgba(0, 0, 0, 0.6); /* Superposición oscura para legibilidad del texto */
+        }
+        .btn-primary {
+            background-color: var(--accent-red); /* Botón principal en rojo vibrante */
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #c0192e; /* Tono más oscuro al pasar el ratón */
+        }
+        .section-padding {
+            padding: 4rem 1.5rem; /* Relleno general de secciones */
+        }
+        .product-card {
+            background-color: var(--secondary-gray);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+        }
+        .stadium-map {
+            background-color: var(--secondary-gray);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .contact-form {
+            background-color: var(--secondary-gray);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        /* Estilos para el efecto parallax en otras secciones si se desea */
+        .bg-experience {
+            background-image: url('https://images.unsplash.com/photo-1549488331-cf19a8427f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="leading-relaxed">
 
-    <!-- =========== Header y Navegación =========== -->
-    <header id="header" class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" class="text-2xl font-bold text-blue-800">
-                Tu Barco
-            </a>
-            <!-- Menú para escritorio -->
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-blue-600">Sobre el Barco</a>
-                <a href="#gallery" class="text-gray-600 hover:text-blue-600">Galería</a>
-                <a href="#experiences" class="text-gray-600 hover:text-blue-600">Experiencias</a>
-                <a href="#contact" class="text-blue-600 hover:text-blue-600 font-semibold">Contacto</a>
+    <nav class="fixed top-0 left-0 right-0 bg-primary-dark bg-opacity-90 z-50 shadow-lg py-4">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <a href="#hero" class="text-2xl font-bold text-accent-gold tracking-wider">Palelu SpA</a>
+            <div class="space-x-8 hidden md:block">
+                <a href="#experiencia" class="text-text-light hover:text-accent-gold transition duration-300">Nuestra Experiencia</a>
+                <a href="#menu" class="text-text-light hover:text-accent-gold transition duration-300">Nuestro Menú</a>
+                <a href="#ubicaciones" class="text-text-light hover:text-accent-gold transition duration-300">Ubicaciones</a>
+                <a href="#contacto" class="text-text-light hover:text-accent-gold transition duration-300">Contacto</a>
             </div>
-            <!-- Botón de reserva -->
-            <a href="#contact" class="hidden md:block bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors">
-                SOLICITAR RESERVA
-            </a>
-            <!-- Menú para móvil (botón) -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
-        </nav>
-        <!-- Menú desplegable para móvil -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white px-6 pb-4">
-            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">Sobre el Barco</a>
-            <a href="#gallery" class="block py-2 text-gray-600 hover:text-blue-600">Galería</a>
-            <a href="#experiences" class="block py-2 text-gray-600 hover:text-blue-600">Experiencias</a>
-            <a href="#contact" class="block py-2 text-blue-600 font-semibold">Contacto</a>
-            <a href="#contact" class="mt-4 block w-full text-center bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors">
-                SOLICITAR RESERVA
-            </a>
+            <button id="mobile-menu-button" class="md:hidden text-text-light focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-primary-dark bg-opacity-95 py-4">
+            <a href="#experiencia" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Nuestra Experiencia</a>
+            <a href="#menu" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Nuestro Menú</a>
+            <a href="#ubicaciones" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Ubicaciones</a>
+            <a href="#contacto" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Contacto</a>
+        </div>
+    </nav>
+
+    <header id="hero" class="bg-hero relative flex items-center justify-center h-screen text-center px-4">
+        <div class="absolute inset-0 bg-overlay-dark"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">El Sabor de la Victoria: <br class="hidden md:block"> Vive el Deporte con Palelu SpA</h1>
+            <p class="text-xl md:text-2xl text-text-light mb-8">Eleva tu pasión por el juego con una experiencia gastronómica inigualable. Tu butaca, tu restaurante gourmet.</p>
+            <a href="#menu" class="btn-primary inline-block text-lg font-semibold uppercase tracking-wide">Descubre Nuestro Menú</a>
         </div>
     </header>
 
-    <main>
-        <!-- =========== Sección Principal (Hero) =========== -->
-        <section class="relative h-[60vh] md:h-[80vh] bg-cover bg-center hero-overlay" style="background-image: url('https://placehold.co/1920x1080/334155/white?text=Imagen+Espectacular+del+Barco');">
-            <div class="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center hero-content">
-                <h1 class="text-white text-4xl md:text-6xl font-bold leading-tight mb-4">Vive una Experiencia Inolvidable</h1>
-                <p class="text-gray-200 text-lg md:text-xl max-w-2xl">Descubre la costa desde una perspectiva única a bordo de nuestra exclusiva embarcación.</p>
-            </div>
-        </section>
+    <section id="experiencia" class="bg-experience relative section-padding flex items-center justify-center text-center">
+        <div class="absolute inset-0 bg-overlay-dark"></div>
+        <div class="relative z-10 max-w-4xl mx-auto bg-secondary-gray p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-bold mb-6 text-accent-gold">Nuestra Experiencia: Gastronomía que Eleva el Partido</h2>
+            <p class="text-lg text-text-light leading-relaxed">En Palelu SpA, creemos que la pasión por el deporte merece ser celebrada con un sabor excepcional. Hemos llegado para transformar la clásica comida de estadio en una vivencia gourmet, elevando cada mordisco a la altura de la emoción del partido. Dejamos atrás lo tradicional para ofrecerte ingredientes frescos, preparaciones artesanales y un servicio que te permite disfrutar al máximo sin perderte ni un segundo de la acción. Nuestra misión es simple: que cada encuentro en el estadio sea no solo un evento deportivo, sino también una fiesta para tu paladar. Únete a la revolución gastronómica en la cancha y descubre por qué en Palelu SpA, cada bocado es un gol.</p>
+            <a href="#ubicaciones" class="btn-primary inline-block mt-8 text-lg font-semibold uppercase tracking-wide">Vive la Experiencia Palelu</a>
+        </div>
+    </section>
 
-        <!-- =========== Sección Sobre el Barco =========== -->
-        <section id="about" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Nuestra Embarcación</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Comodidad, seguridad y elegancia en cada detalle.</p>
+    <section id="menu" class="bg-primary-dark section-padding text-center">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Nuestro Menú: Sabores que Anotan Goles</h2>
+
+            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Sándwiches Gourmet</h3>
+            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Nuestros sándwiches gourmet son la esencia de la comodidad y el sabor. Preparamos cada uno con panes artesanales, carnes jugosas cocinadas a la perfección y vegetales frescos que explotan en cada bocado.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1626079930722-19e0ac10d7a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mechada Luco" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mechada Luco</h4>
+                        <p class="text-text-light text-md">Jugosa carne mechada cocinada a fuego lento, acompañada de queso fundido que se estira en cada mordisco. Un clásico chileno elevado al nivel gourmet.</p>
+                    </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1579895240409-9069638c11e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Pollo Palta Mayo" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Pollo Palta Mayo</h4>
+                        <p class="text-text-light text-md">Tiernas tiras de pollo desmenuzado, mezcladas con cremosa palta fresca y mayonesa casera, en pan artesanal. Ligero, fresco y lleno de sabor.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden lg:block">
+                    <img src="https://images.unsplash.com/photo-1563810453718-f2b7f3b8b60c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Sándwich Premium Veggie" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Sándwich Premium Veggie</h4>
+                        <p class="text-text-light text-md">Una explosión de frescura con vegetales de estación, queso de cabra y aderezo especial en pan integral. La opción deliciosa para paladares vegetarianos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Bocadillos Premium</h3>
+            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Pequeños en tamaño, gigantes en sabor. Nuestros bocadillos premium son la opción ideal para compartir o para darte un gusto rápido sin perderte la acción.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1596701831868-2a2b0e6e7d6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Empanadas de Pino" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Empanadas de Pino</h4>
+                        <p class="text-text-light text-md">Nuestras tradicionales empanadas de pino, con un relleno casero de carne, cebolla y especias, envueltas en una masa dorada y crujiente.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1582236317208-16e5f3224b17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Brochetas Variadas" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Brochetas Variadas</h4>
+                        <p class="text-text-light text-md">Deliciosas brochetas de pollo y vegetales frescos, marinadas y asadas a la perfección. Ideales para un bocado rápido y sabroso.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden lg:block">
+                    <img src="https://images.unsplash.com/photo-1594953934526-72879555c826?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mini Quiches" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mini Quiches</h4>
+                        <p class="text-text-light text-md">Pequeños y cremosos quiches con rellenos variados como espinaca y queso, o jamón y champiñones. Un bocado sofisticado para cualquier momento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Snacks Artesanales</h3>
+            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">¿Antojo de algo crujiente y delicioso? Nuestros snacks artesanales son la alternativa perfecta a lo convencional.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1549611005-4f0e0f31a23a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Papas Fritas Caseras" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Papas Fritas Caseras</h4>
+                        <p class="text-text-light text-md">Papas cortadas a mano, fritas a la perfección hasta obtener un dorado crujiente y salado. El snack ideal para los amantes de lo auténtico.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1512496294064-a626a5b6b107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mix de Frutos Secos" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mix de Frutos Secos</h4>
+                        <p class="text-text-light text-md">Una selección premium de almendras, nueces, maní y otros frutos secos. Energizante y nutritivo, perfecto para mantener la atención en el juego.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden lg:block">
+                    <img src="https://images.unsplash.com/photo-1599814408139-44d2d46e3828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Chips de Vegetales" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Chips de Vegetales</h4>
+                        <p class="text-text-light text-md">Crujientes chips de vegetales variados como camote, betarraga y zanahoria. Una opción colorida y saludable para picar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Bebidas y Cafetería</h3>
+            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Refresca tu pasión o recarga tus energías. Nuestra selección de bebidas y cafetería está pensada para complementar a la perfección tu experiencia gastronómica.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517407000185-3e284a6007e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Café de Grano" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Café de Grano</h4>
+                        <p class="text-text-light text-md">Un aromático y robusto café de grano, recién preparado. Ideal para mantenerte despierto y disfrutar cada momento del partido.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1596395361048-b3d90f230b05?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Jugos Naturales" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Jugos Naturales</h4>
+                        <p class="text-text-light text-md">Frescos y revitalizantes jugos naturales de frutas de la estación. La opción perfecta para hidratarse con sabor.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden lg:block">
+                    <img src="https://images.unsplash.com/photo-1582046559385-d8aa1315b800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Bebidas Frías Variadas" class="w-full h-64 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Bebidas Frías Variadas</h4>
+                        <p class="text-text-light text-md">Amplia selección de bebidas frías para todos los gustos: desde gaseosas clásicas hasta aguas saborizadas. Siempre frías, siempre listas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicaciones" class="bg-secondary-gray section-padding text-center">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Encuéntranos: Tu Sabor en Cada Estadio</h2>
+            <p class="text-lg text-text-light mb-12 max-w-3xl mx-auto">Palelu SpA está presente en los estadios más importantes de la región, llevando nuestra propuesta gourmet a tu butaca. ¡Ubícanos fácilmente!</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="stadium-map">
+                    <h3 class="text-3xl font-semibold mb-4 text-accent-red">Estadio La Portada (La Serena)</h3>
+                    <p class="text-lg text-text-light mb-6">Para nuestros clientes más exclusivos, Palelu SpA les espera en el corazón de la **Marquesina** del Estadio La Portada. Disfruta de la mejor vista y el mejor sabor, con un servicio premium diseñado para complementar tu experiencia VIP.</p>
+                    <img src="https://via.placeholder.com/600x400/333333/FFFFFF?text=Mapa+La+Portada+-+Marquesina" alt="Mapa Estadio La Portada" class="w-full rounded-md shadow-lg mb-4">
+                    <p class="text-md text-gray-400">Te esperamos para elevar tu jornada deportiva a un nivel de lujo y comodidad.</p>
+                </div>
+
+                <div class="stadium-map">
+                    <h3 class="text-3xl font-semibold mb-4 text-accent-red">Estadio Francisco Sánchez Rumoroso (Coquimbo)</h3>
+                    <p class="text-lg text-text-light mb-6">El pulso del estadio se siente en la **Tribuna**, y Palelu SpA llega para nutrir esa energía. Encuéntranos en puntos estratégicos de tu sector, ofreciéndote una alternativa fresca, rápida y deliciosa a la comida tradicional.</p>
+                    <img src="https://via.placeholder.com/600x400/333333/FFFFFF?text=Mapa+Sanchez+Rumoroso+-+Tribuna" alt="Mapa Estadio Francisco Sánchez Rumoroso" class="w-full rounded-md shadow-lg mb-4">
+                    <p class="text-md text-gray-400">No te conformes con menos: la pasión del puerto merece un sabor de calidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="bg-primary-dark section-padding text-center">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Hablemos: Consulta por Eventos Especiales</h2>
+            <p class="text-lg text-text-light mb-10 max-w-3xl mx-auto">¿Interesado en llevar la experiencia Palelu SpA a tu próximo evento privado o corporativo? Contáctanos y elevaremos tu celebración con nuestra propuesta gastronómica premium.</p>
+
+            <div class="max-w-xl mx-auto contact-form">
+                <form id="contactForm" class="grid grid-cols-1 gap-6 text-left">
                     <div>
-                        <img src="https://placehold.co/800x600/e2e8f0/334155?text=Foto+Interior+del+Barco" alt="Interior del barco" class="rounded-lg shadow-xl w-full">
+                        <label for="name" class="block text-text-light text-lg font-semibold mb-2">Nombre Completo</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="Tu nombre" required>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Un Diseño Pensado para Ti</h3>
-                        <p class="text-gray-600 mb-4">
-                            Aquí puedes describir tu barco. Por ejemplo: "Nuestro yate modelo [Modelo del Barco] de [Año] combina un diseño moderno con todas las comodidades necesarias para una jornada perfecta en el mar. Con capacidad para [Número] pasajeros, es ideal para salidas familiares, eventos corporativos o celebraciones especiales."
-                        </p>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Amplia cubierta con solárium</li>
-                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Salón interior climatizado</li>
-                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Equipo de música Bluetooth</li>
-                            <li class="flex items-center"><svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Equipamiento completo de seguridad</li>
-                        </ul>
+                        <label for="email" class="block text-text-light text-lg font-semibold mb-2">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="tu@email.com" required>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========== Sección Galería =========== -->
-        <section id="gallery" class="py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Momentos a Bordo</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Imagina tu próxima aventura con nosotros.</p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <img src="https://placehold.co/600x400/94a3b8/white?text=Galería+1" alt="Imagen de la galería 1" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <img src="https://placehold.co/600x400/64748b/white?text=Galería+2" alt="Imagen de la galería 2" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <img src="https://placehold.co/600x400/475569/white?text=Galería+3" alt="Imagen de la galería 3" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
-                    <img src="https://placehold.co/600x400/334155/white?text=Galería+4" alt="Imagen de la galería 4" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
-                </div>
-            </div>
-        </section>
-        
-        <!-- =========== Sección Experiencias =========== -->
-        <section id="experiences" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Nuestras Experiencias</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Tours y paquetes diseñados para todos los gustos.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Experiencia 1 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
-                        <h3 class="text-xl font-bold text-blue-800 mb-2">Paseo por la Costa</h3>
-                        <p class="text-gray-600">Un tour de 4 horas para descubrir las calas y playas más hermosas de la zona. Incluye bebidas y snacks.</p>
+                    <div>
+                        <label for="phone" class="block text-text-light text-lg font-semibold mb-2">Teléfono (Opcional)</label>
+                        <input type="tel" id="phone" name="phone" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="+56 9 XXXXXXXX">
                     </div>
-                    <!-- Experiencia 2 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
-                        <h3 class="text-xl font-bold text-blue-800 mb-2">Atardecer Mágico</h3>
-                        <p class="text-gray-600">Disfruta de una puesta de sol inolvidable desde el mar con una copa de cava. La experiencia más romántica.</p>
+                    <div>
+                        <label for="eventType" class="block text-text-light text-lg font-semibold mb-2">Tipo de Evento</label>
+                        <select id="eventType" name="eventType" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="corporativo">Evento Corporativo</option>
+                            <option value="privado">Evento Privado</option>
+                            <option value="otro">Otro</option>
+                        </select>
                     </div>
-                    <!-- Experiencia 3 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
-                        <h3 class="text-xl font-bold text-blue-800 mb-2">Alquiler Privado</h3>
-                        <p class="text-gray-600">Reserva el barco en exclusiva para tu grupo. Diseñamos un plan a tu medida para un día perfecto.</p>
+                    <div>
+                        <label for="message" class="block text-text-light text-lg font-semibold mb-2">Tu Mensaje</label>
+                        <textarea id="message" name="message" rows="5" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="Cuéntanos sobre tu evento y tus necesidades..." required></textarea>
                     </div>
-                </div>
+                    <button type="submit" class="btn-primary w-full mt-4 text-xl font-bold uppercase">Enviar Consulta</button>
+                    <div id="formSuccessMessage" class="hidden mt-4 p-4 rounded-md bg-green-600 text-white text-center">
+                        ¡Gracias por tu mensaje! Nos pondremos en contacto contigo a la brevedad.
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-
-        <!-- =========== Sección Contacto y Reservas =========== -->
-        <section id="contact" class="py-16 md:py-24 bg-gray-200">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Contacta con Nosotros</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Envíanos tu consulta y te responderemos a la brevedad.</p>
-                </div>
-                <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-2xl">
-                    <form id="contact-form">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <!-- Nombre -->
-                            <div>
-                                <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Nombre Completo</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
-                            </div>
-                            <!-- Email -->
-                            <div>
-                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" required>
-                            </div>
-                            <!-- Teléfono -->
-                            <div>
-                                <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">Teléfono</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <!-- Tipo de consulta -->
-                            <div>
-                                <label for="enquiry" class="block text-sm font-semibold text-gray-700 mb-1">Tipo de Consulta</label>
-                                <select id="enquiry" name="enquiry" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                                    <option>Información General</option>
-                                    <option>Reserva para Evento Privado</option>
-                                    <option>Consulta sobre Tour</option>
-                                    <option>Otro</option>
-                                </select>
-                            </div>
-                            <!-- Número de Pasajeros -->
-                            <div>
-                                <label for="guests" class="block text-sm font-semibold text-gray-700 mb-1">Número de Pasajeros (aprox.)</label>
-                                <input type="number" id="guests" name="guests" min="1" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <!-- Fecha preferida -->
-                            <div>
-                                <label for="date" class="block text-sm font-semibold text-gray-700 mb-1">Fecha Preferida</label>
-                                <input type="date" id="date" name="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                        </div>
-                        <!-- Mensaje -->
-                        <div class="mt-6">
-                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Mensaje</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" placeholder="Cuéntanos más sobre lo que necesitas..."></textarea>
-                        </div>
-                        <!-- Botón de envío -->
-                        <div class="mt-8 text-center">
-                            <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-md font-bold text-lg hover:bg-blue-700 transition-colors w-full md:w-auto">
-                                Enviar Solicitud
-                            </button>
-                        </div>
-                    </form>
-                    <div id="form-message" class="mt-4 text-center"></div>
-                </div>
+    <footer class="bg-primary-dark text-text-light py-8 text-center border-t border-gray-700">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Palelu SpA. Todos los derechos reservados.</p>
+            <div class="mt-4 text-sm text-gray-400">
+                Diseño y experiencia con pasión.
             </div>
-        </section>
-    </main>
-
-    <!-- =========== Footer =========== -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p class="font-bold text-xl mb-2">Nombre del Barco</p>
-            <p class="text-gray-400">© 2025. Todos los derechos reservados.</p>
-            <p class="text-gray-400 mt-2">Ubicado en [Ciudad/Puerto], [País]</p>
         </div>
     </footer>
 
     <script>
-        // --- Script para el menú móvil ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Lógica para el envío del formulario (simulado)
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previene el envío real del formulario
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+            const successMessage = document.getElementById('formSuccessMessage');
+            successMessage.classList.remove('hidden'); // Muestra el mensaje de éxito
 
-        // --- Script para el envío del formulario (simulado) ---
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Previene el envío real del formulario
-
-            // Simulación de envío
-            formMessage.textContent = 'Enviando...';
-            formMessage.className = 'mt-4 text-center text-blue-600';
-
+            // Opcional: limpiar el formulario después de un breve retraso
             setTimeout(() => {
-                // Muestra un mensaje de éxito
-                formMessage.textContent = '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.';
-                formMessage.className = 'mt-4 text-center text-green-600 font-semibold';
-                
-                // Limpia el formulario
-                contactForm.reset();
-
-                // Oculta el mensaje después de 5 segundos
-                setTimeout(() => {
-                    formMessage.textContent = '';
-                }, 5000);
-
-            }, 2000);
+                this.reset(); // Reinicia todos los campos del formulario
+                successMessage.classList.add('hidden'); // Oculta el mensaje de éxito
+            }, 3000); // El mensaje se oculta después de 3 segundos
         });
 
-        // --- Script para el scroll suave ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                // Oculta el menú móvil si está abierto
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Lógica para el botón del menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden'); // Alterna la visibilidad del menú
+        });
+
+        // Ocultar el menú móvil al hacer clic en un enlace (para navegación de anclaje)
+        document.querySelectorAll('#mobile-menu a').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
             });
         });
     </script>
