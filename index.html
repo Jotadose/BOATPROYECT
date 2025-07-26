@@ -1,335 +1,287 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palelu SpA - Sabor Gourmet en tu Estadio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <title>Club Deportes La Serena - El Orgullo de la Región</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Roboto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons (Atributo 'integrity' corregido) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles, Animations & Shape Dividers -->
     <style>
-        /* Estilos personalizados para la paleta de colores y tipografía */
-        :root {
-            --primary-dark: #1a1a1a; /* Negro muy oscuro para fondos */
-            --secondary-gray: #333333; /* Gris oscuro para secciones */
-            --accent-gold: #D4AF37; /* Dorado vibrante para acentos */
-            --accent-red: #E21B35; /* Rojo vibrante para la pasión deportiva */
-            --text-light: #f3f4f6; /* Texto claro */
-        }
         body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-light);
-            background-color: var(--primary-dark);
-            scroll-behavior: smooth; /* Desplazamiento suave para la navegación */
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden; /* Previene el desbordamiento horizontal por las animaciones */
         }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-gold); /* Títulos en dorado para un toque premium */
-        }
-        .bg-hero {
-            background-image: url('https://images.unsplash.com/photo-1626079930722-19e0ac10d7a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+        .hero-bg {
+            /* Imagen de placeholder confiable para el Estadio La Portada */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/1a1a1a/FFFFFF?text=Estadio+La+Portada');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efecto parallax */
         }
-        .bg-overlay-dark {
-            background-color: rgba(0, 0, 0, 0.6); /* Superposición oscura para legibilidad del texto */
+
+        /* Animaciones de entrada */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .btn-primary {
-            background-color: var(--accent-red); /* Botón principal en rojo vibrante */
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .btn-primary:hover {
-            background-color: #c0192e; /* Tono más oscuro al pasar el ratón */
+
+        /* Efecto de elevación en hover para tarjetas */
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .section-padding {
-            padding: 4rem 1.5rem; /* Relleno general de secciones */
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .product-card {
-            background-color: var(--secondary-gray);
-            border-radius: 0.75rem;
+
+        /* Divisores de sección con SVG para transiciones suaves */
+        .section-divider {
+            position: relative;
+            width: 100%;
             overflow: hidden;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            line-height: 0;
         }
-        .product-card:hover {
-            transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+        .section-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px; /* Altura de la curva */
         }
-        .stadium-map {
-            background-color: var(--secondary-gray);
-            border-radius: 0.75rem;
-            padding: 2rem;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        .section-divider .shape-fill {
+            fill: #f5f5f5; /* Coincide con el color de fondo de la siguiente sección */
         }
-        .contact-form {
-            background-color: var(--secondary-gray);
-            padding: 2.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        .section-divider-bottom .shape-fill {
+             fill: #FFFFFF;
         }
-        /* Estilos para el efecto parallax en otras secciones si se desea */
-        .bg-experience {
-            background-image: url('https://images.unsplash.com/photo-1549488331-cf19a8427f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        garnet: '#800000',
+                        'garnet-dark': '#660000',
+                        'light-gray': '#f5f5f5',
+                        'dark-gray': '#1a1a1a',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="leading-relaxed">
+<body class="bg-white text-dark-gray">
 
-    <nav class="fixed top-0 left-0 right-0 bg-primary-dark bg-opacity-90 z-50 shadow-lg py-4">
-        <div class="container mx-auto flex justify-between items-center px-6">
-            <a href="#hero" class="text-2xl font-bold text-accent-gold tracking-wider">Palelu SpA</a>
-            <div class="space-x-8 hidden md:block">
-                <a href="#experiencia" class="text-text-light hover:text-accent-gold transition duration-300">Nuestra Experiencia</a>
-                <a href="#menu" class="text-text-light hover:text-accent-gold transition duration-300">Nuestro Menú</a>
-                <a href="#ubicaciones" class="text-text-light hover:text-accent-gold transition duration-300">Ubicaciones</a>
-                <a href="#contacto" class="text-text-light hover:text-accent-gold transition duration-300">Contacto</a>
+    <!-- ===== HEADER / NAVIGATION ===== -->
+    <header id="header" class="bg-white/90 backdrop-blur-lg fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300">
+        <nav class="container mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
+            <a href="#inicio" class="flex items-center space-x-3">
+                <img src="https://placehold.co/50x50/800000/FFFFFF?text=CDLS" alt="Escudo oficial de Club Deportes La Serena" class="h-10 lg:h-12">
+                <span class="font-black text-lg lg:text-xl text-garnet hidden sm:block">CD LA SERENA</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-6 font-semibold text-dark-gray/80">
+                <a href="#noticias" class="hover:text-garnet transition duration-300">Noticias</a>
+                <a href="#partidos" class="hover:text-garnet transition duration-300">Partidos</a>
+                <a href="#plantel" class="hover:text-garnet transition duration-300">Plantel</a>
+                <a href="#tienda" class="hover:text-garnet transition duration-300">Tienda</a>
+                <a href="#socios" class="hover:text-garnet transition duration-300">Socios</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-text-light focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-primary-dark bg-opacity-95 py-4">
-            <a href="#experiencia" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Nuestra Experiencia</a>
-            <a href="#menu" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Nuestro Menú</a>
-            <a href="#ubicaciones" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Ubicaciones</a>
-            <a href="#contacto" class="block px-6 py-2 text-text-light hover:text-accent-gold transition duration-300">Contacto</a>
-        </div>
-    </nav>
-
-    <header id="hero" class="bg-hero relative flex items-center justify-center h-screen text-center px-4">
-        <div class="absolute inset-0 bg-overlay-dark"></div>
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">El Sabor de la Victoria: <br class="hidden md:block"> Vive el Deporte con Palelu SpA</h1>
-            <p class="text-xl md:text-2xl text-text-light mb-8">Eleva tu pasión por el juego con una experiencia gastronómica inigualable. Tu butaca, tu restaurante gourmet.</p>
-            <a href="#menu" class="btn-primary inline-block text-lg font-semibold uppercase tracking-wide">Descubre Nuestro Menú</a>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hidden sm:block bg-garnet text-white font-bold py-2 px-5 rounded-lg hover:bg-garnet-dark transition duration-300 transform hover:scale-105">
+                    Comprar Entradas
+                </a>
+                <button id="mobile-menu-button" class="lg:hidden text-garnet text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
+            <a href="#noticias" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Noticias</a>
+            <a href="#partidos" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Partidos</a>
+            <a href="#plantel" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Plantel</a>
+            <a href="#tienda" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Tienda</a>
+            <a href="#socios" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Socios</a>
+            <div class="p-4">
+                 <a href="#" class="block w-full text-center bg-garnet text-white font-bold py-3 px-5 rounded-lg hover:bg-garnet-dark transition duration-300">
+                    Comprar Entradas
+                </a>
+            </div>
         </div>
     </header>
 
-    <section id="experiencia" class="bg-experience relative section-padding flex items-center justify-center text-center">
-        <div class="absolute inset-0 bg-overlay-dark"></div>
-        <div class="relative z-10 max-w-4xl mx-auto bg-secondary-gray p-8 rounded-lg shadow-xl">
-            <h2 class="text-4xl font-bold mb-6 text-accent-gold">Nuestra Experiencia: Gastronomía que Eleva el Partido</h2>
-            <p class="text-lg text-text-light leading-relaxed">En Palelu SpA, creemos que la pasión por el deporte merece ser celebrada con un sabor excepcional. Hemos llegado para transformar la clásica comida de estadio en una vivencia gourmet, elevando cada mordisco a la altura de la emoción del partido. Dejamos atrás lo tradicional para ofrecerte ingredientes frescos, preparaciones artesanales y un servicio que te permite disfrutar al máximo sin perderte ni un segundo de la acción. Nuestra misión es simple: que cada encuentro en el estadio sea no solo un evento deportivo, sino también una fiesta para tu paladar. Únete a la revolución gastronómica en la cancha y descubre por qué en Palelu SpA, cada bocado es un gol.</p>
-            <a href="#ubicaciones" class="btn-primary inline-block mt-8 text-lg font-semibold uppercase tracking-wide">Vive la Experiencia Palelu</a>
+    <main>
+        <!-- ===== HERO SECTION ===== -->
+        <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-white text-center pt-20">
+            <!-- Se elimina la clase 'visible' para que la animación se active con JS al cargar -->
+            <div class="container mx-auto px-4 fade-in-up">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider">
+                    Más que un Club, <span class="text-garnet">una Pasión</span>
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+                    El orgullo de la Región de Coquimbo. Sigue toda la actualidad del Más Grande.
+                </p>
+                <div class="mt-12 bg-black/50 backdrop-blur-sm p-6 rounded-2xl max-w-3xl mx-auto border border-white/20">
+                    <h2 class="text-2xl font-bold uppercase mb-4">Próximo Partido</h2>
+                    <div class="flex items-center justify-center space-x-4 md:space-x-8">
+                        <div class="text-center">
+                            <img src="https://placehold.co/80x80/800000/FFFFFF?text=CDLS" alt="Escudo de Club Deportes La Serena" class="h-16 md:h-20 mx-auto">
+                            <span class="block mt-2 font-bold">CD La Serena</span>
+                        </div>
+                        <span class="text-4xl font-thin">VS</span>
+                        <div class="text-center">
+                            <img src="https://placehold.co/80x80/FFFFFF/000000?text=RIVAL" alt="Escudo del equipo rival" class="h-16 md:h-20 mx-auto">
+                            <span class="block mt-2 font-bold">Rival de Turno</span>
+                        </div>
+                    </div>
+                    <div id="countdown" class="flex justify-center space-x-4 md:space-x-6 mt-6 text-center">
+                        <div><span id="days" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Días</span></div>
+                        <div><span id="hours" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Horas</span></div>
+                        <div><span id="minutes" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Minutos</span></div>
+                        <div><span id="seconds" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Segundos</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divisor de sección -->
+        <div class="section-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
         </div>
-    </section>
 
-    <section id="menu" class="bg-primary-dark section-padding text-center">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Nuestro Menú: Sabores que Anotan Goles</h2>
-
-            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Sándwiches Gourmet</h3>
-            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Nuestros sándwiches gourmet son la esencia de la comodidad y el sabor. Preparamos cada uno con panes artesanales, carnes jugosas cocinadas a la perfección y vegetales frescos que explotan en cada bocado.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1626079930722-19e0ac10d7a0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mechada Luco" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mechada Luco</h4>
-                        <p class="text-text-light text-md">Jugosa carne mechada cocinada a fuego lento, acompañada de queso fundido que se estira en cada mordisco. Un clásico chileno elevado al nivel gourmet.</p>
+        <!-- ===== NEWS SECTION ===== -->
+        <section id="noticias" class="py-16 lg:py-24 bg-light-gray">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Últimas <span class="text-garnet">Noticias</span></h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- News Card 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up">
+                        <div class="overflow-hidden">
+                            <img src="https://placehold.co/600x400/333333/FFFFFF?text=Entrenamiento+del+equipo" alt="Jugadores de CD La Serena entrenando en el campo de juego" class="w-full h-56 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-sm font-semibold text-garnet">PRIMER EQUIPO</span>
+                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">CD La Serena se prepara para un duelo clave en casa</h3>
+                            <p class="text-dark-gray/80 text-sm">El equipo entrenó intensamente durante la semana con la mira puesta en conseguir los tres puntos.</p>
+                        </div>
+                    </div>
+                    <!-- News Card 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up" style="transition-delay: 200ms;">
+                        <div class="overflow-hidden">
+                           <img src="https://placehold.co/600x400/333333/FFFFFF?text=Cantera+Granate" alt="Jóvenes de la cantera de CD La Serena celebrando un gol" class="w-full h-56 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-sm font-semibold text-garnet">FÚTBOL JOVEN</span>
+                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">La cantera granate sigue dando frutos y suma victorias</h3>
+                            <p class="text-dark-gray/80 text-sm">Las categorías inferiores del club tuvieron una jornada exitosa, demostrando el gran trabajo formativo.</p>
+                        </div>
+                    </div>
+                    <!-- News Card 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up" style="transition-delay: 400ms;">
+                         <div class="overflow-hidden">
+                           <img src="https://placehold.co/600x400/333333/FFFFFF?text=Hinchada+en+La+Portada" alt="Hinchas de CD La Serena en las gradas del estadio" class="w-full h-56 object-cover">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-sm font-semibold text-garnet">CLUB</span>
+                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">Exitosa jornada de captación de nuevos socios</h3>
+                            <p class="text-dark-gray/80 text-sm">Cientos de hinchas se acercaron para ser parte del club, demostrando una vez más su incondicional apoyo.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1579895240409-9069638c11e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Pollo Palta Mayo" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Pollo Palta Mayo</h4>
-                        <p class="text-text-light text-md">Tiernas tiras de pollo desmenuzado, mezcladas con cremosa palta fresca y mayonesa casera, en pan artesanal. Ligero, fresco y lleno de sabor.</p>
-                    </div>
-                </div>
-                <div class="product-card hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1563810453718-f2b7f3b8b60c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Sándwich Premium Veggie" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Sándwich Premium Veggie</h4>
-                        <p class="text-text-light text-md">Una explosión de frescura con vegetales de estación, queso de cabra y aderezo especial en pan integral. La opción deliciosa para paladares vegetarianos.</p>
-                    </div>
+                <div class="text-center mt-12 fade-in-up">
+                    <a href="#" class="bg-dark-gray text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition duration-300 transform hover:scale-105">
+                        Ver Todas las Noticias
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Bocadillos Premium</h3>
-            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Pequeños en tamaño, gigantes en sabor. Nuestros bocadillos premium son la opción ideal para compartir o para darte un gusto rápido sin perderte la acción.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1596701831868-2a2b0e6e7d6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Empanadas de Pino" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Empanadas de Pino</h4>
-                        <p class="text-text-light text-md">Nuestras tradicionales empanadas de pino, con un relleno casero de carne, cebolla y especias, envueltas en una masa dorada y crujiente.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1582236317208-16e5f3224b17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Brochetas Variadas" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Brochetas Variadas</h4>
-                        <p class="text-text-light text-md">Deliciosas brochetas de pollo y vegetales frescos, marinadas y asadas a la perfección. Ideales para un bocado rápido y sabroso.</p>
-                    </div>
-                </div>
-                <div class="product-card hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1594953934526-72879555c826?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mini Quiches" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mini Quiches</h4>
-                        <p class="text-text-light text-md">Pequeños y cremosos quiches con rellenos variados como espinaca y queso, o jamón y champiñones. Un bocado sofisticado para cualquier momento.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Snacks Artesanales</h3>
-            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">¿Antojo de algo crujiente y delicioso? Nuestros snacks artesanales son la alternativa perfecta a lo convencional.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1549611005-4f0e0f31a23a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Papas Fritas Caseras" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Papas Fritas Caseras</h4>
-                        <p class="text-text-light text-md">Papas cortadas a mano, fritas a la perfección hasta obtener un dorado crujiente y salado. El snack ideal para los amantes de lo auténtico.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1512496294064-a626a5b6b107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Mix de Frutos Secos" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Mix de Frutos Secos</h4>
-                        <p class="text-text-light text-md">Una selección premium de almendras, nueces, maní y otros frutos secos. Energizante y nutritivo, perfecto para mantener la atención en el juego.</p>
-                    </div>
-                </div>
-                <div class="product-card hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1599814408139-44d2d46e3828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Chips de Vegetales" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Chips de Vegetales</h4>
-                        <p class="text-text-light text-md">Crujientes chips de vegetales variados como camote, betarraga y zanahoria. Una opción colorida y saludable para picar.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="text-3xl font-semibold mb-6 text-accent-red mt-10">Bebidas y Cafetería</h3>
-            <p class="text-lg text-text-light mb-8 max-w-3xl mx-auto">Refresca tu pasión o recarga tus energías. Nuestra selección de bebidas y cafetería está pensada para complementar a la perfección tu experiencia gastronómica.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1517407000185-3e284a6007e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Café de Grano" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Café de Grano</h4>
-                        <p class="text-text-light text-md">Un aromático y robusto café de grano, recién preparado. Ideal para mantenerte despierto y disfrutar cada momento del partido.</p>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <img src="https://images.unsplash.com/photo-1596395361048-b3d90f230b05?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Jugos Naturales" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Jugos Naturales</h4>
-                        <p class="text-text-light text-md">Frescos y revitalizantes jugos naturales de frutas de la estación. La opción perfecta para hidratarse con sabor.</p>
-                    </div>
-                </div>
-                <div class="product-card hidden lg:block">
-                    <img src="https://images.unsplash.com/photo-1582046559385-d8aa1315b800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Bebidas Frías Variadas" class="w-full h-64 object-cover rounded-t-lg">
-                    <div class="p-6">
-                        <h4 class="text-2xl font-bold text-accent-gold mb-2">Bebidas Frías Variadas</h4>
-                        <p class="text-text-light text-md">Amplia selección de bebidas frías para todos los gustos: desde gaseosas clásicas hasta aguas saborizadas. Siempre frías, siempre listas.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Divisor de sección -->
+        <div class="section-divider section-divider-bottom" style="background-color: #f5f5f5;">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
         </div>
-    </section>
 
-    <section id="ubicaciones" class="bg-secondary-gray section-padding text-center">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Encuéntranos: Tu Sabor en Cada Estadio</h2>
-            <p class="text-lg text-text-light mb-12 max-w-3xl mx-auto">Palelu SpA está presente en los estadios más importantes de la región, llevando nuestra propuesta gourmet a tu butaca. ¡Ubícanos fácilmente!</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="stadium-map">
-                    <h3 class="text-3xl font-semibold mb-4 text-accent-red">Estadio La Portada (La Serena)</h3>
-                    <p class="text-lg text-text-light mb-6">Para nuestros clientes más exclusivos, Palelu SpA les espera en el corazón de la **Marquesina** del Estadio La Portada. Disfruta de la mejor vista y el mejor sabor, con un servicio premium diseñado para complementar tu experiencia VIP.</p>
-                    <img src="https://via.placeholder.com/600x400/333333/FFFFFF?text=Mapa+La+Portada+-+Marquesina" alt="Mapa Estadio La Portada" class="w-full rounded-md shadow-lg mb-4">
-                    <p class="text-md text-gray-400">Te esperamos para elevar tu jornada deportiva a un nivel de lujo y comodidad.</p>
+        <!-- ===== FIXTURE/RESULTS SECTION ===== -->
+        <section id="partidos" class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Fixture y <span class="text-garnet">Resultados</span></h2>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <!-- Match Card: Result -->
+                    <div class="grid grid-cols-3 items-center bg-light-gray p-4 rounded-2xl shadow-md fade-in-up">
+                        <div class="flex items-center justify-end space-x-3">
+                            <span class="hidden sm:block font-bold text-right">CD La Serena</span>
+                            <img src="https://placehold.co/40x40/800000/FFFFFF?text=CDLS" alt="Escudo CD La Serena" class="h-10">
+                        </div>
+                        <div class="text-center font-black text-2xl border-x-2 border-gray-300">
+                            <span>3 - 1</span>
+                            <span class="block text-xs font-normal text-gray-500">FINALIZADO</span>
+                        </div>
+                        <div class="flex items-center justify-start space-x-3">
+                            <img src="https://placehold.co/40x40/CCCCCC/000000?text=ADV" alt="Escudo Adversario" class="h-10">
+                            <span class="hidden sm:block font-bold text-left">Adversario FC</span>
+                        </div>
+                    </div>
+                    <!-- Match Card: Next Match -->
+                    <div class="grid grid-cols-3 items-center bg-garnet text-white p-4 rounded-2xl shadow-lg fade-in-up">
+                        <div class="flex items-center justify-end space-x-3">
+                            <span class="hidden sm:block font-bold text-right">CD La Serena</span>
+                            <img src="https://placehold.co/40x40/FFFFFF/800000?text=CDLS" alt="Escudo CD La Serena" class="h-10">
+                        </div>
+                        <div class="text-center font-black text-2xl border-x-2 border-garnet-dark">
+                            <span>VS</span>
+                            <span class="block text-xs font-normal opacity-80">HOY - 18:00</span>
+                        </div>
+                        <div class="flex items-center justify-start space-x-3">
+                            <img src="https://placehold.co/40x40/FFFFFF/000000?text=RIVAL" alt="Escudo Rival de Turno" class="h-10">
+                            <span class="hidden sm:block font-bold text-left">Rival de Turno</span>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="stadium-map">
-                    <h3 class="text-3xl font-semibold mb-4 text-accent-red">Estadio Francisco Sánchez Rumoroso (Coquimbo)</h3>
-                    <p class="text-lg text-text-light mb-6">El pulso del estadio se siente en la **Tribuna**, y Palelu SpA llega para nutrir esa energía. Encuéntranos en puntos estratégicos de tu sector, ofreciéndote una alternativa fresca, rápida y deliciosa a la comida tradicional.</p>
-                    <img src="https://via.placeholder.com/600x400/333333/FFFFFF?text=Mapa+Sanchez+Rumoroso+-+Tribuna" alt="Mapa Estadio Francisco Sánchez Rumoroso" class="w-full rounded-md shadow-lg mb-4">
-                    <p class="text-md text-gray-400">No te conformes con menos: la pasión del puerto merece un sabor de calidad.</p>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contacto" class="bg-primary-dark section-padding text-center">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-accent-gold">Hablemos: Consulta por Eventos Especiales</h2>
-            <p class="text-lg text-text-light mb-10 max-w-3xl mx-auto">¿Interesado en llevar la experiencia Palelu SpA a tu próximo evento privado o corporativo? Contáctanos y elevaremos tu celebración con nuestra propuesta gastronómica premium.</p>
-
-            <div class="max-w-xl mx-auto contact-form">
-                <form id="contactForm" class="grid grid-cols-1 gap-6 text-left">
-                    <div>
-                        <label for="name" class="block text-text-light text-lg font-semibold mb-2">Nombre Completo</label>
-                        <input type="text" id="name" name="name" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="Tu nombre" required>
+        <!-- ===== ROSTER SECTION ===== -->
+        <section id="plantel" class="py-16 lg:py-24 bg-white">
+             <div class="container mx-auto px-4">
+                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Nuestro <span class="text-garnet">Plantel</span></h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- Player Card -->
+                    <div class="text-center group fade-in-up">
+                        <div class="relative rounded-2xl overflow-hidden card-hover-effect">
+                            <img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4 text-white w-full">
+                                <p class="font-bold text-lg">Nombre Apellido</p>
+                                <p class="text-sm opacity-80">Delantero</p>
+                            </div>
+                            <div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">9</div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="email" class="block text-text-light text-lg font-semibold mb-2">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="tu@email.com" required>
-                    </div>
-                    <div>
-                        <label for="phone" class="block text-text-light text-lg font-semibold mb-2">Teléfono (Opcional)</label>
-                        <input type="tel" id="phone" name="phone" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="+56 9 XXXXXXXX">
-                    </div>
-                    <div>
-                        <label for="eventType" class="block text-text-light text-lg font-semibold mb-2">Tipo de Evento</label>
-                        <select id="eventType" name="eventType" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="corporativo">Evento Corporativo</option>
-                            <option value="privado">Evento Privado</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-text-light text-lg font-semibold mb-2">Tu Mensaje</label>
-                        <textarea id="message" name="message" rows="5" class="w-full p-3 rounded-md bg-primary-dark border border-gray-600 text-text-light focus:ring-accent-red focus:border-accent-red" placeholder="Cuéntanos sobre tu evento y tus necesidades..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full mt-4 text-xl font-bold uppercase">Enviar Consulta</button>
-                    <div id="formSuccessMessage" class="hidden mt-4 p-4 rounded-md bg-green-600 text-white text-center">
-                        ¡Gracias por tu mensaje! Nos pondremos en contacto contigo a la brevedad.
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-primary-dark text-text-light py-8 text-center border-t border-gray-700">
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Palelu SpA. Todos los derechos reservados.</p>
-            <div class="mt-4 text-sm text-gray-400">
-                Diseño y experiencia con pasión.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Lógica para el envío del formulario (simulado)
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Previene el envío real del formulario
-
-            const successMessage = document.getElementById('formSuccessMessage');
-            successMessage.classList.remove('hidden'); // Muestra el mensaje de éxito
-
-            // Opcional: limpiar el formulario después de un breve retraso
-            setTimeout(() => {
-                this.reset(); // Reinicia todos los campos del formulario
-                successMessage.classList.add('hidden'); // Oculta el mensaje de éxito
-            }, 3000); // El mensaje se oculta después de 3 segundos
-        });
-
-        // Lógica para el botón del menú móvil
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden'); // Alterna la visibilidad del menú
-        });
-
-        // Ocultar el menú móvil al hacer clic en un enlace (para navegación de anclaje)
-        document.querySelectorAll('#mobile-menu a').forEach(item => {
-            item.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
-            });
-        });
-    </script>
-
-</body>
-</html>
+                    <!-- Repetir Player Card para otros jugadores -->
+                    <div class="text-center group fade-in-up" style="transition-delay: 100ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Otro Jugador</p><p class="text-sm opacity-80">Defensa</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">5</div></div></div>
+                    <div class="text-center group fade-in-up" style="transition-delay: 200ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Tercer Jugador</p><p class="text-sm opacity-80">Mediocampista</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">10</div></div></div>
+                    <div class="text-center group fade-in-up" style="transition-delay: 300ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Cuarto Jugador</p><p class="text-sm opacity-80">Arquero</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">1</div></div></div>
+                    <div class="text-center group fade-in-up" style="transition-delay: 400ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><
