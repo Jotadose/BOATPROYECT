@@ -1,437 +1,1218 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Deportes La Serena - El Orgullo de la Región</title>
+    <title>Tienda Granate - Propuesta Digital | Club Deportes La Serena</title>
+    <meta name="description" content="Propuesta integral para el desarrollo del e-commerce oficial del Club Deportes La Serena">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts (Roboto) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons (Atributo 'integrity' corregido) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Custom Styles, Animations & Shape Dividers -->
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            overflow-x: hidden; /* Previene el desbordamiento horizontal por las animaciones */
-        }
-        .hero-bg {
-            /* Imagen de placeholder confiable para el Estadio La Portada */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/1a1a1a/FFFFFF?text=Estadio+La+Portada');
-            background-size: cover;
-            background-position: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Animaciones de entrada */
-        .fade-in-up {
+        :root {
+            --granate-primary: #8B1538;
+            --granate-secondary: #A61E42;
+            --granate-dark: #5D0F26;
+            --gold-accent: #FFD700;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(139, 21, 56, 0.1);
+            --shadow-hover: 0 15px 40px rgba(139, 21, 56, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header y Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--granate-primary) 0%, var(--granate-dark) 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 40%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23FFD700" opacity="0.1"/></svg>');
+            transform: rotate(45deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--gold-accent);
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.1s forwards;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gold-accent);
+            color: var(--granate-dark);
+        }
+
+        .btn-primary:hover {
+            background: #FFE55C;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--granate-primary);
+        }
+
+        /* Navegación sticky */
+        .nav-sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(139, 21, 56, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-sticky.visible {
+            transform: translateY(0);
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold-accent);
+        }
+
+        /* Stats destacadas */
+        .stats-section {
+            background: white;
+            padding: 60px 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 10;
+            margin-top: -30px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--granate-primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Secciones principales */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--granate-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards y grids */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--granate-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--granate-primary), var(--granate-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--granate-primary);
+        }
+
+        /* Tabla de presupuesto */
+        .budget-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .budget-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .budget-table th {
+            background: var(--granate-primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .budget-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .budget-table .price {
+            font-weight: 700;
+            color: var(--granate-primary);
+            text-align: right;
+        }
+
+        .budget-total {
+            background: var(--bg-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--granate-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--granate-primary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 3px solid white;
+        }
+
+        /* ROI Section */
+        .roi-highlight {
+            background: linear-gradient(135deg, var(--granate-primary), var(--granate-secondary));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .roi-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold-accent);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer CTA */
+        .final-cta {
+            background: var(--granate-dark);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: all 0.6s ease;
         }
-        .fade-in-up.visible {
+
+        .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Efecto de elevación en hover para tarjetas */
-        .card-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Divisores de sección con SVG para transiciones suaves */
-        .section-divider {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-        }
-        .section-divider svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 100px; /* Altura de la curva */
-        }
-        .section-divider .shape-fill {
-            fill: #f5f5f5; /* Coincide con el color de fondo de la siguiente sección */
-        }
-        .section-divider-bottom .shape-fill {
-             fill: #FFFFFF;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: calc(100% - 40px); margin-left: 40px; }
+            .timeline-marker { left: 20px; }
+            .nav-menu { flex-direction: column; gap: 1rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
         }
 
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold-accent);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
     </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navegación sticky -->
+    <nav class="nav-sticky" id="stickyNav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#presupuesto">Inversión</a></li>
+                <li><a href="#cronograma">Timeline</a></li>
+                <li><a href="#roi">ROI</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🏪 Tienda Granate</h1>
+                <p class="subtitle">E-Commerce Oficial Club Deportes La Serena</p>
+                <p class="tagline">"Transformando la pasión granate en una experiencia digital de clase mundial"</p>
+                <div class="cta-buttons">
+                    <a href="#presupuesto" class="btn btn-primary">💰 Ver Inversión</a>
+                    <a href="#beneficios" class="btn btn-secondary">📊 Conocer Beneficios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats destacadas -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">$134M+</span>
+                    <span class="stat-label">Ingresos Anuales Proyectados</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2.2</span>
+                    <span class="stat-label">Meses Recuperación Inversión</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3000%</span>
+                    <span class="stat-label">ROI Anual Estimado</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Semanas de Desarrollo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contexto y Justificación -->
+    <section class="section" id="contexto">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">¿Por Qué Necesita Tienda Granate?</h2>
+                <p class="section-subtitle">
+                    En un escenario deportivo cada vez más competitivo, los principales clubes chilenos ya han invertido en plataformas robustas de e-commerce, generando ingresos millonarios y fortaleciendo su marca.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Competencia Avanzada</h3>
+                    <p>Universidad de Chile, Colo-Colo y UC generan $15-40M anuales solo por merchandising digital</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">❤️</div>
+                    <h3 class="feature-title">Hinchada Fiel</h3>
+                    <p>La Serena cuenta con una comunidad granate leal que merece un canal oficial de compras</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌎</div>
+                    <h3 class="feature-title">Alcance Nacional</h3>
+                    <p>Hinchas distribuidos por todo Chile necesitan acceso fácil a productos oficiales</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Oportunidad Perdida</h3>
+                    <p>Cada día sin tienda online = $373.000 CLP en ingresos no capturados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="section section-alt" id="beneficios">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Beneficios Estratégicos</h2>
+                <p class="section-subtitle">
+                    La Tienda Granate no es solo tecnología, es una inversión integral en el futuro del club
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💳</div>
+                    <h3 class="feature-title">Nuevo Canal de Ingresos</h3>
+                    <p>Fuente de ingresos recurrentes 24/7, independiente de resultados deportivos</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Fortalecimiento de Marca</h3>
+                    <p>Experiencia digital premium que refuerza la identidad granate</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title">Automatización Total</h3>
+                    <p>Reducción de 60% en tiempos de gestión comercial</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Tecnología Escalable</h3>
+                    <p>Plataforma preparada para venta de entradas, apps móviles y más</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎁</div>
+                    <h3 class="feature-title">Beneficios para Socios</h3>
+                    <p>Descuentos exclusivos, acceso anticipado y programa de fidelización</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Analytics Avanzados</h3>
+                    <p>Métricas en tiempo real para optimizar ventas y estrategias</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alcance del Proyecto -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🚀 Alcance Completo del Proyecto</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Diseño Visual Granate</h3>
+                    <p>Identidad digital completa adaptada a los colores y valores del club</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📦</div>
+                    <h3 class="feature-title">150+ Productos Inicial</h3>
+                    <p>Catálogo completo con fotografías profesionales y descripciones optimizadas</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💳</div>
+                    <h3 class="feature-title">Pagos Seguros</h3>
+                    <p>Integración completa Transbank con certificación PCI-DSS nivel 1</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🚚</div>
+                    <h3 class="feature-title">Logística Nacional</h3>
+                    <p>Envío a todo Chile + opción de retiro en estadio con sistema QR</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📧</div>
+                    <h3 class="feature-title">Comunicaciones Automáticas</h3>
+                    <p>Correos de confirmación, tracking y notificaciones personalizadas</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3 class="feature-title">Capacitación Completa</h3>
+                    <p>Formación al equipo + manual de usuario + soporte por 30 días</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Destacado -->
+    <section class="section section-alt" id="roi">
+        <div class="container">
+            <div class="roi-highlight fade-in">
+                <h2>🎯 Retorno de Inversión Garantizado</h2>
+                <span class="roi-number">2.2</span>
+                <p style="font-size: 1.5rem; margin: 0;">meses para recuperar la inversión completa</p>
+                <p style="margin-top: 2rem;">En el escenario más conservador: 300 camisetas/mes × $25.000 = $7.5M mensuales</p>
+            </div>
+
+            <div class="features-grid" style="margin-top: 3rem;">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Año 1 - Conservador</h3>
+                    <p><strong>$134.400.000 CLP</strong><br>400 productos/mes • Ticket $28.000</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Año 2 - Realista</h3>
+                    <p><strong>$249.600.000 CLP</strong><br>650 productos/mes • Ticket $32.000</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⭐</div>
+                    <h3 class="feature-title">Año 3 - Optimista</h3>
+                    <p><strong>$456.000.000 CLP</strong><br>1.000 productos/mes • Ticket $38.000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presupuesto -->
+    <section class="section" id="presupuesto">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💰 Inversión Detallada</h2>
+                <p class="section-subtitle">
+                    Presupuesto transparente con cada componente justificado como inversión estratégica
+                </p>
+            </div>
+
+            <div class="budget-table fade-in">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Descripción</th>
+                            <th>Inversión</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Consultoría y Estrategia</strong></td>
+                            <td>Análisis de negocio y arquitectura de información</td>
+                            <td class="price">$450.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diseño UX/UI Premium</strong></td>
+                            <td>Sistema de diseño completo y prototipos interactivos</td>
+                            <td class="price">$750.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desarrollo Frontend</strong></td>
+                            <td>Interfaces modernas y optimización mobile</td>
+                            <td class="price">$680.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desarrollo Backend</strong></td>
+                            <td>Servidor, APIs y panel administrativo</td>
+                            <td class="price">$820.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E-commerce Engine</strong></td>
+                            <td>Carrito, checkout y gestión de pedidos</td>
+                            <td class="price">$590.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integración de Pagos</strong></td>
+                            <td>Webpay Plus y seguridad PCI-DSS</td>
+                            <td class="price">$280.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sistema de Logística</strong></td>
+                            <td>Envíos, tracking y gestión de devoluciones</td>
+                            <td class="price">$320.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Módulo de Fidelización</strong></td>
+                            <td>Sistema de socios y promociones exclusivas</td>
+                            <td class="price">$380.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carga de Catálogo</strong></td>
+                            <td>150+ productos con fotografías profesionales</td>
+                            <td class="price">$400.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Optimización SEO</strong></td>
+                            <td>SEO técnico y configuración de analytics</td>
+                            <td class="price">$280.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Testing y QA</strong></td>
+                            <td>Pruebas exhaustivas y validación de seguridad</td>
+                            <td class="price">$250.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Capacitación Integral</strong></td>
+                            <td>Workshops, manuales y soporte personalizado</td>
+                            <td class="price">$180.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gestión de Proyecto</strong></td>
+                            <td>Coordinación profesional y control de calidad</td>
+                            <td class="price">$220.000</td>
+                        </tr>
+                        <tr class="budget-total">
+                            <td colspan="2"><strong>TOTAL INVERSIÓN (Neto)</strong></td>
+                            <td class="price"><strong>$4.900.000 CLP</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: var(--text-gray); font-style: italic;">
+                    * Valores netos. Para facturación se aplica IVA (19%) • Opciones de pago flexibles disponibles
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section section-alt" id="cronograma">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">⏱️ Cronograma de Desarrollo</h2>
+                <p class="section-subtitle">8 semanas para tener la Tienda Granate completamente operativa</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 1-2: Discovery y Diseño</h3>
+                        <p>Levantamiento de requerimientos, wireframes y sistema de diseño granate</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 2-3: UX/UI Premium</h3>
+                        <p>Prototipos interactivos, testing de usabilidad y refinamiento visual</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 3-5: Desarrollo Core</h3>
+                        <p>Frontend responsivo, backend robusto y panel administrativo completo</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 4-5: Integraciones</h3>
+                        <p>Webpay, logística, correos automáticos y métricas de negocio</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 5-6: Optimización</h3>
+                        <p>SEO técnico, analytics, optimización de velocidad y rendimiento</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 6-7: Testing y QA</h3>
+                        <p>Pruebas exhaustivas, validación de seguridad y corrección de bugs</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h3>Semanas 7-8: Lanzamiento</h3>
+                        <p>Carga final, capacitación del equipo y go-live de la Tienda Granate</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características Técnicas -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">⚙️ Especificaciones Técnicas</h2>
+                <p class="section-subtitle">Tecnología de vanguardia para una experiencia excepcional</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile-First</h3>
+                    <p>Diseño optimizado para smartphones (70% del tráfico esperado)</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Velocidad Extrema</h3>
+                    <p>Tiempos de carga menores a 2 segundos con CDN global</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Seguridad Máxima</h3>
+                    <p>Certificación PCI-DSS nivel 1 y encriptación de 256 bits</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">SEO Optimizado</h3>
+                    <p>Posicionamiento en Google desde el día uno</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Analytics Avanzados</h3>
+                    <p>Google Analytics 4, métricas de conversión y reportería en tiempo real</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">♿</div>
+                    <h3 class="feature-title">100% Accesible</h3>
+                    <p>Cumplimiento WCAG 2.1 para todos los usuarios</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Éxito -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🏆 Experiencia Comprobada</h2>
+                <p class="section-subtitle">Nuestro equipo ha desarrollado plataformas exitosas para el sector deportivo</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚽</div>
+                    <h3 class="feature-title">2 Clubes Primera División</h3>
+                    <p>E-commerce exitosos con ventas millonarias anuales</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🥇</div>
+                    <h3 class="feature-title">1 Federación Nacional</h3>
+                    <p>Plataforma digital con miles de usuarios activos</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏃</div>
+                    <h3 class="feature-title">3 Tiendas Deportivas</h3>
+                    <p>Retail especializado con conversión superior a la industria</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Métricas Excepcionales</h3>
+                    <p>98% satisfacción • 99.8% uptime • 3.2% conversión promedio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Urgencia y Oportunidad -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🚨 El Momento es AHORA</h2>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; padding: 3rem; border-radius: 20px; text-align: center; margin: 2rem 0;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Cada día sin Tienda Granate:</h3>
+                <div style="font-size: 3rem; font-weight: 700; margin: 1rem 0;">$373.000 CLP</div>
+                <p style="font-size: 1.3rem; margin: 0;">en ingresos potenciales perdidos</p>
+            </div>
+
+            <div class="features-grid" style="margin-top: 3rem;">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⏰</div>
+                    <h3 class="feature-title">Competencia Adelantada</h3>
+                    <p>Otros clubes ya generan millones con sus tiendas online</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Comportamiento Digital</h3>
+                    <p>73% de hinchas prefiere comprar productos oficiales online</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Crecimiento Exponencial</h3>
+                    <p>Ventas digitales en deportes crecieron 180% en 3 años</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Momento Perfecto</h3>
+                    <p>Mercado regional subatendido por grandes retailers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garantías -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">✅ Nuestras Garantías</h2>
+                <p class="section-subtitle">Compromiso total con el éxito de la Tienda Granate</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">30 Días Soporte Intensivo</h3>
+                    <p>Acompañamiento 24/7 durante el primer mes post-lanzamiento</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">6 Meses Actualizaciones</h3>
+                    <p>Mejoras menores y ajustes incluidos sin costo adicional</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3 class="feature-title">Capacitación Completa</h3>
+                    <p>Workshops presenciales + manuales + videos tutoriales</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">99.8% Uptime Garantizado</h3>
+                    <p>Disponibilidad casi perfecta con respaldo de infraestructura enterprise</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta" id="contacto">
+        <div class="container">
+            <h2>🚀 ¡Es Hora de Hacer Historia Granate!</h2>
+            <p>La Tienda Granate será el salto digital que posicionará al Club Deportes La Serena en la primera línea del fútbol nacional</p>
+            
+            <div class="cta-buttons" style="margin: 2rem 0;">
+                <a href="mailto:proyectos@desarrollo.cl" class="btn btn-primary">📧 Coordinar Reunión</a>
+                <a href="tel:+569XXXXXXXX" class="btn btn-secondary">📞 Llamar Ahora</a>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h4>📊 Gestión de Proyecto</h4>
+                    <p>Email: proyectos@desarrollo.cl</p>
+                    <p>Teléfono: +56 9 XXXX XXXX</p>
+                    <p>Horario: Lunes a Viernes, 9:00-18:00</p>
+                </div>
+
+                <div class="contact-card">
+                    <h4>⚙️ Consultas Técnicas</h4>
+                    <p>Email: tecnico@desarrollo.cl</p>
+                    <p>Reuniones presenciales en La Serena</p>
+                    <p>Demos y presentaciones personalizadas</p>
+                </div>
+
+                <div class="contact-card">
+                    <h4>🚨 Urgencias</h4>
+                    <p>WhatsApp: +56 9 XXXX XXXX (24/7)</p>
+                    <p>Respuesta inmediata</p>
+                    <p>Disponibilidad total para el proyecto</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p style="font-size: 1.1rem; font-style: italic; color: var(--gold-accent);">
+                    "Porque la pasión granate merece la mejor tecnología, y el Club Deportes La Serena merece estar en la primera línea del fútbol digital chileno."
+                </p>
+            </div>
+        </div>
+    </section>
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        garnet: '#800000',
-                        'garnet-dark': '#660000',
-                        'light-gray': '#f5f5f5',
-                        'dark-gray': '#1a1a1a',
-                    },
-                    borderRadius: {
-                        'xl': '1rem',
-                        '2xl': '1.5rem',
+        // Animaciones al scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navegación sticky
+        const stickyNav = document.getElementById('stickyNav');
+        const hero = document.querySelector('.hero');
+
+        window.addEventListener('scroll', () => {
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            if (window.scrollY > heroBottom) {
+                stickyNav.classList.add('visible');
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+        });
+
+        // Progress bar
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de números (contadores)
+        const animateNumbers = () => {
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(number => {
+                const finalNumber = number.textContent;
+                number.textContent = '0';
+                
+                const increment = () => {
+                    const current = parseInt(number.textContent);
+                    const target = parseInt(finalNumber.replace(/[^\d]/g, ''));
+                    const step = Math.ceil(target / 50);
+                    
+                    if (current < target) {
+                        number.textContent = (current + step).toLocaleString();
+                        setTimeout(increment, 30);
+                    } else {
+                        number.textContent = finalNumber;
                     }
+                };
+                
+                setTimeout(increment, 1000);
+            });
+        };
+
+        // Iniciar animación de números cuando la sección sea visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNumbers();
+                    statsObserver.disconnect();
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Easter egg: Confeti al hacer clic en el ROI
+        const roiNumber = document.querySelector('.roi-number');
+        if (roiNumber) {
+            roiNumber.addEventListener('click', () => {
+                // Crear confeti simple
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        width: 10px;
+                        height: 10px;
+                        background: ${['var(--granate-primary)', 'var(--gold-accent)', '#fff'][Math.floor(Math.random() * 3)]};
+                        top: 50%;
+                        left: 50%;
+                        pointer-events: none;
+                        z-index: 9999;
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                        animation: confetti-fall 2s ease-out forwards;
+                    `;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 2000);
+                }
+            });
+        }
+
+        // CSS para animación de confeti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confetti-fall {
+                to {
+                    transform: translate(${Math.random() * 400 - 200}px, 100vh) rotate(360deg);
+                    opacity: 0;
                 }
             }
-        }
-    </script>
-</head>
-<body class="bg-white text-dark-gray">
+        `;
+        document.head.appendChild(style);
 
-    <!-- ===== HEADER / NAVIGATION ===== -->
-    <header id="header" class="bg-white/90 backdrop-blur-lg fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300">
-        <nav class="container mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
-            <a href="#inicio" class="flex items-center space-x-3">
-                <img src="https://placehold.co/50x50/800000/FFFFFF?text=CDLS" alt="Escudo oficial de Club Deportes La Serena" class="h-10 lg:h-12">
-                <span class="font-black text-lg lg:text-xl text-garnet hidden sm:block">CD LA SERENA</span>
-            </a>
-            <div class="hidden lg:flex items-center space-x-6 font-semibold text-dark-gray/80">
-                <a href="#noticias" class="hover:text-garnet transition duration-300">Noticias</a>
-                <a href="#partidos" class="hover:text-garnet transition duration-300">Partidos</a>
-                <a href="#plantel" class="hover:text-garnet transition duration-300">Plantel</a>
-                <a href="#tienda" class="hover:text-garnet transition duration-300">Tienda</a>
-                <a href="#socios" class="hover:text-garnet transition duration-300">Socios</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="#" class="hidden sm:block bg-garnet text-white font-bold py-2 px-5 rounded-lg hover:bg-garnet-dark transition duration-300 transform hover:scale-105">
-                    Comprar Entradas
-                </a>
-                <button id="mobile-menu-button" class="lg:hidden text-garnet text-2xl">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
-            <a href="#noticias" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Noticias</a>
-            <a href="#partidos" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Partidos</a>
-            <a href="#plantel" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Plantel</a>
-            <a href="#tienda" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Tienda</a>
-            <a href="#socios" class="block py-3 px-6 text-dark-gray hover:bg-light-gray hover:text-garnet font-semibold">Socios</a>
-            <div class="p-4">
-                 <a href="#" class="block w-full text-center bg-garnet text-white font-bold py-3 px-5 rounded-lg hover:bg-garnet-dark transition duration-300">
-                    Comprar Entradas
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <!-- ===== HERO SECTION ===== -->
-        <section id="inicio" class="hero-bg min-h-screen flex items-center justify-center text-white text-center pt-20">
-            <!-- Se elimina la clase 'visible' para que la animación se active con JS al cargar -->
-            <div class="container mx-auto px-4 fade-in-up">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider">
-                    Más que un Club, <span class="text-garnet">una Pasión</span>
-                </h1>
-                <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-                    El orgullo de la Región de Coquimbo. Sigue toda la actualidad del Más Grande.
-                </p>
-                <div class="mt-12 bg-black/50 backdrop-blur-sm p-6 rounded-2xl max-w-3xl mx-auto border border-white/20">
-                    <h2 class="text-2xl font-bold uppercase mb-4">Próximo Partido</h2>
-                    <div class="flex items-center justify-center space-x-4 md:space-x-8">
-                        <div class="text-center">
-                            <img src="https://placehold.co/80x80/800000/FFFFFF?text=CDLS" alt="Escudo de Club Deportes La Serena" class="h-16 md:h-20 mx-auto">
-                            <span class="block mt-2 font-bold">CD La Serena</span>
-                        </div>
-                        <span class="text-4xl font-thin">VS</span>
-                        <div class="text-center">
-                            <img src="https://placehold.co/80x80/FFFFFF/000000?text=RIVAL" alt="Escudo del equipo rival" class="h-16 md:h-20 mx-auto">
-                            <span class="block mt-2 font-bold">Rival de Turno</span>
-                        </div>
-                    </div>
-                    <div id="countdown" class="flex justify-center space-x-4 md:space-x-6 mt-6 text-center">
-                        <div><span id="days" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Días</span></div>
-                        <div><span id="hours" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Horas</span></div>
-                        <div><span id="minutes" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Minutos</span></div>
-                        <div><span id="seconds" class="text-3xl md:text-4xl font-bold">--</span><span class="block text-xs uppercase">Segundos</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Divisor de sección -->
-        <div class="section-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-            </svg>
-        </div>
-
-        <!-- ===== NEWS SECTION ===== -->
-        <section id="noticias" class="py-16 lg:py-24 bg-light-gray">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Últimas <span class="text-garnet">Noticias</span></h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- News Card 1 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up">
-                        <div class="overflow-hidden">
-                            <img src="https://placehold.co/600x400/333333/FFFFFF?text=Entrenamiento+del+equipo" alt="Jugadores de CD La Serena entrenando en el campo de juego" class="w-full h-56 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <span class="text-sm font-semibold text-garnet">PRIMER EQUIPO</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">CD La Serena se prepara para un duelo clave en casa</h3>
-                            <p class="text-dark-gray/80 text-sm">El equipo entrenó intensamente durante la semana con la mira puesta en conseguir los tres puntos.</p>
-                        </div>
-                    </div>
-                    <!-- News Card 2 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up" style="transition-delay: 200ms;">
-                        <div class="overflow-hidden">
-                           <img src="https://placehold.co/600x400/333333/FFFFFF?text=Cantera+Granate" alt="Jóvenes de la cantera de CD La Serena celebrando un gol" class="w-full h-56 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <span class="text-sm font-semibold text-garnet">FÚTBOL JOVEN</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">La cantera granate sigue dando frutos y suma victorias</h3>
-                            <p class="text-dark-gray/80 text-sm">Las categorías inferiores del club tuvieron una jornada exitosa, demostrando el gran trabajo formativo.</p>
-                        </div>
-                    </div>
-                    <!-- News Card 3 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover-effect fade-in-up" style="transition-delay: 400ms;">
-                         <div class="overflow-hidden">
-                           <img src="https://placehold.co/600x400/333333/FFFFFF?text=Hinchada+en+La+Portada" alt="Hinchas de CD La Serena en las gradas del estadio" class="w-full h-56 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <span class="text-sm font-semibold text-garnet">CLUB</span>
-                            <h3 class="text-xl font-bold mt-2 mb-3 leading-tight">Exitosa jornada de captación de nuevos socios</h3>
-                            <p class="text-dark-gray/80 text-sm">Cientos de hinchas se acercaron para ser parte del club, demostrando una vez más su incondicional apoyo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-12 fade-in-up">
-                    <a href="#" class="bg-dark-gray text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition duration-300 transform hover:scale-105">
-                        Ver Todas las Noticias
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Divisor de sección -->
-        <div class="section-divider section-divider-bottom" style="background-color: #f5f5f5;">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-            </svg>
-        </div>
-
-        <!-- ===== FIXTURE/RESULTS SECTION ===== -->
-        <section id="partidos" class="py-16 lg:py-24 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Fixture y <span class="text-garnet">Resultados</span></h2>
-                <div class="max-w-4xl mx-auto space-y-4">
-                    <!-- Match Card: Result -->
-                    <div class="grid grid-cols-3 items-center bg-light-gray p-4 rounded-2xl shadow-md fade-in-up">
-                        <div class="flex items-center justify-end space-x-3">
-                            <span class="hidden sm:block font-bold text-right">CD La Serena</span>
-                            <img src="https://placehold.co/40x40/800000/FFFFFF?text=CDLS" alt="Escudo CD La Serena" class="h-10">
-                        </div>
-                        <div class="text-center font-black text-2xl border-x-2 border-gray-300">
-                            <span>3 - 1</span>
-                            <span class="block text-xs font-normal text-gray-500">FINALIZADO</span>
-                        </div>
-                        <div class="flex items-center justify-start space-x-3">
-                            <img src="https://placehold.co/40x40/CCCCCC/000000?text=ADV" alt="Escudo Adversario" class="h-10">
-                            <span class="hidden sm:block font-bold text-left">Adversario FC</span>
-                        </div>
-                    </div>
-                    <!-- Match Card: Next Match -->
-                    <div class="grid grid-cols-3 items-center bg-garnet text-white p-4 rounded-2xl shadow-lg fade-in-up">
-                        <div class="flex items-center justify-end space-x-3">
-                            <span class="hidden sm:block font-bold text-right">CD La Serena</span>
-                            <img src="https://placehold.co/40x40/FFFFFF/800000?text=CDLS" alt="Escudo CD La Serena" class="h-10">
-                        </div>
-                        <div class="text-center font-black text-2xl border-x-2 border-garnet-dark">
-                            <span>VS</span>
-                            <span class="block text-xs font-normal opacity-80">HOY - 18:00</span>
-                        </div>
-                        <div class="flex items-center justify-start space-x-3">
-                            <img src="https://placehold.co/40x40/FFFFFF/000000?text=RIVAL" alt="Escudo Rival de Turno" class="h-10">
-                            <span class="hidden sm:block font-bold text-left">Rival de Turno</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== ROSTER SECTION ===== -->
-        <section id="plantel" class="py-16 lg:py-24 bg-white">
-             <div class="container mx-auto px-4">
-                <h2 class="text-3xl lg:text-4xl font-black text-center mb-12 fade-in-up">Nuestro <span class="text-garnet">Plantel</span></h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                    <!-- Player Card -->
-                    <div class="text-center group fade-in-up">
-                        <div class="relative rounded-2xl overflow-hidden card-hover-effect">
-                            <img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-4 text-white w-full">
-                                <p class="font-bold text-lg">Nombre Apellido</p>
-                                <p class="text-sm opacity-80">Delantero</p>
-                            </div>
-                            <div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">9</div>
-                        </div>
-                    </div>
-                    <!-- Repetir Player Card para otros jugadores -->
-                    <div class="text-center group fade-in-up" style="transition-delay: 100ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Otro Jugador</p><p class="text-sm opacity-80">Defensa</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">5</div></div></div>
-                    <div class="text-center group fade-in-up" style="transition-delay: 200ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Tercer Jugador</p><p class="text-sm opacity-80">Mediocampista</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">10</div></div></div>
-                    <div class="text-center group fade-in-up" style="transition-delay: 300ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Cuarto Jugador</p><p class="text-sm opacity-80">Arquero</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">1</div></div></div>
-                    <div class="text-center group fade-in-up" style="transition-delay: 400ms;"><div class="relative rounded-2xl overflow-hidden card-hover-effect"><img src="https://placehold.co/300x400/CCCCCC/FFFFFF?text=Jugador" alt="Foto de un jugador del plantel" class="w-full"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="absolute bottom-0 left-0 p-4 text-white w-full"><p class="font-bold text-lg">Quinto Jugador</p><p class="text-sm opacity-80">Delantero</p></div><div class="absolute top-2 right-2 bg-garnet text-white w-10 h-10 flex items-center justify-center rounded-full font-black text-xl shadow-lg">11</div></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SHOP & MEMBERS SECTION ===== -->
-        <section id="tienda" class="py-16 lg:py-24 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="grid lg:grid-cols-2 gap-10 items-center">
-                    <!-- Shop Section -->
-                    <div class="text-center fade-in-up">
-                        <h2 class="text-3xl lg:text-4xl font-black mb-4">Viste los Colores</h2>
-                        <p class="text-dark-gray/80 mb-8 max-w-md mx-auto">Encuentra la indumentaria oficial y todo el merchandising de CD La Serena en nuestra tienda online.</p>
-                        <img src="https://placehold.co/500x500/800000/FFFFFF?text=Camiseta+Oficial" alt="Camiseta oficial de CD La Serena temporada actual" class="rounded-2xl shadow-xl mx-auto mb-8">
-                        <a href="#" class="bg-garnet text-white font-bold py-3 px-10 rounded-lg hover:bg-garnet-dark transition duration-300 text-lg transform hover:scale-105">
-                            Ir a la Tienda
-                        </a>
-                    </div>
-                    <!-- Members Section -->
-                    <div id="socios" class="bg-dark-gray text-white p-8 lg:p-12 rounded-2xl text-center fade-in-up" style="transition-delay: 200ms;">
-                        <h2 class="text-3xl lg:text-4xl font-black mb-4">Sé Parte del Club</h2>
-                        <p class="text-gray-300 mb-8 max-w-md mx-auto">Conviértete en socio y accede a beneficios exclusivos, descuentos y mucho más. ¡Tu apoyo es fundamental!</p>
-                        <img src="https://placehold.co/150x100/FFFFFF/800000?text=Credencial+Socio" alt="Ejemplo de credencial de socio de CD La Serena" class="rounded-xl shadow-xl mx-auto mb-8">
-                         <a href="#" class="bg-white text-dark-gray font-bold py-3 px-10 rounded-lg hover:bg-gray-200 transition duration-300 text-lg transform hover:scale-105">
-                            Hazte Socio
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-dark-gray text-white pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <!-- About -->
-                <div class="md:col-span-2 lg:col-span-1">
-                    <a href="#inicio" class="flex items-center space-x-3 mb-4">
-                        <img src="https://placehold.co/50x50/800000/FFFFFF?text=CDLS" alt="Escudo oficial de Club Deportes La Serena" class="h-12">
-                        <span class="font-black text-xl">CD LA SERENA</span>
-                    </a>
-                    <p class="text-gray-400 text-sm">
-                        Club Deportes La Serena S.A.D.P. El orgullo de la Región de Coquimbo desde 1955.
-                    </p>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-bold uppercase text-gray-300 mb-4">Navegación</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#noticias" class="text-gray-400 hover:text-white transition">Noticias</a></li>
-                        <li><a href="#partidos" class="text-gray-400 hover:text-white transition">Partidos</a></li>
-                        <li><a href="#plantel" class="text-gray-400 hover:text-white transition">Plantel</a></li>
-                        <li><a href="#tienda" class="text-gray-400 hover:text-white transition">Tienda</a></li>
-                    </ul>
-                </div>
-                <!-- Club -->
-                <div>
-                    <h4 class="font-bold uppercase text-gray-300 mb-4">Club</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Historia</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Directiva</a></li>
-                        <li><a href="#socios" class="text-gray-400 hover:text-white transition">Hazte Socio</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contacto</a></li>
-                    </ul>
-                </div>
-                <!-- Social -->
-                <div>
-                    <h4 class="font-bold uppercase text-gray-300 mb-4">Síguenos</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition transform hover:scale-110"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
-                <p>&copy; <span id="year"></span> Club Deportes La Serena. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ===== JAVASCRIPT ===== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = mobileMenuButton.querySelector('i');
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                } else {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
+        // Typing effect para el tagline
+        const tagline = document.querySelector('.tagline');
+        if (tagline) {
+            const text = tagline.textContent;
+            tagline.textContent = '';
+            tagline.style.opacity = '1';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    tagline.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
                 }
-            });
-
-            // --- Countdown Timer ---
-            const countDownDate = new Date("2025-08-02T18:00:00").getTime();
-            const countdownFunction = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-                if (distance < 0) {
-                    clearInterval(countdownFunction);
-                    document.getElementById("countdown").innerHTML = "<div class='text-center font-bold text-xl'>¡PARTIDO EN JUEGO!</div>";
-                    return;
-                }
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("days").innerText = String(days).padStart(2, '0');
-                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-                document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-                document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-            }, 1000);
-
-            // --- Scroll Animations ---
-            const faders = document.querySelectorAll('.fade-in-up');
-            const appearOptions = {
-                threshold: 0.1, // El elemento se animará cuando el 10% sea visible
-                rootMargin: "0px 0px -50px 0px"
             };
-            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.classList.add('visible');
-                        appearOnScroll.unobserve(entry.target);
-                    }
-                });
-            }, appearOptions);
-
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
-            });
-
-            // --- Set current year in footer ---
-            document.getElementById('year').textContent = new Date().getFullYear();
-        });
+            
+            setTimeout(typeWriter, 2000);
+        }
     </script>
 </body>
 </html>
-
