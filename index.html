@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Granate - Propuesta Digital | Club Deportes La Serena</title>
     <meta name="description" content="Propuesta integral para el desarrollo del e-commerce oficial del Club Deportes La Serena">
+    <link rel="canonical" href="https://jemiliodev.vercel.app/tienda-granate-propuesta" />
+    <meta property="og:title" content="Tienda Granate - Propuesta Digital | Club Deportes La Serena">
+    <meta property="og:description" content="Presentación visual de inversión, demo y alcance del proyecto e-commerce para el Club Deportes La Serena.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jemiliodev.vercel.app/tienda-granate-propuesta">
+    <meta property="og:image" content="https://jemiliodev.vercel.app/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tienda Granate - Propuesta Digital">
+    <meta name="twitter:description" content="Presentación visual de inversión, demo y alcance del proyecto e-commerce para el Club Deportes La Serena.">
     
     <style>
         * {
@@ -37,6 +46,31 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Accesibilidad básica */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .skip-link:focus {
+            left: 16px;
+            top: 16px;
+            width: auto;
+            height: auto;
+            background: var(--gold-accent);
+            color: var(--granate-dark);
+            padding: 10px 14px;
+            border-radius: 6px;
+            z-index: 10000;
+        }
+        a:focus-visible, .btn:focus-visible {
+            outline: 3px solid var(--gold-accent);
+            outline-offset: 2px;
         }
 
         /* Header y Hero */
@@ -443,6 +477,18 @@
             transform: translateY(0);
         }
 
+        /* Respeta usuarios con reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto !important;
+            }
+            .fade-in {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
@@ -466,18 +512,78 @@
             z-index: 9999;
             transition: width 0.1s ease;
         }
+
+        /* Demo / Mockup estilos */
+        .demo-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .device-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+        }
+        .device-title {
+            font-weight: 600;
+            color: var(--granate-primary);
+            margin-bottom: 0.5rem;
+        }
+        .device {
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fafafa;
+        }
+        .device .browser-bar {
+            display: flex;
+            gap: 6px;
+            padding: 8px 10px;
+            background: #efefef;
+        }
+        .device .dot { width: 10px; height: 10px; border-radius: 50%; background: #d2d2d2; }
+        .device .screen { padding: 14px; }
+        .skeleton { background: #eee; border-radius: 6px; }
+        .s-row { height: 12px; margin-bottom: 10px; }
+        .s-img { height: 120px; margin-bottom: 10px; }
+        .s-btn { height: 36px; width: 100%; }
+
+        /* Resumen visual presupuesto */
+        .budget-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .budget-pill {
+            background: white;
+            border-left: 4px solid var(--granate-primary);
+            padding: 1rem 1rem 1rem 1.2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        .budget-pill .label { color: var(--text-gray); font-size: 0.95rem; }
+        .budget-pill .amount { color: var(--granate-primary); font-weight: 700; }
     </style>
 </head>
 <body>
+    <a href="#inicio" class="skip-link">Saltar a contenido principal</a>
     <div class="progress-bar" id="progressBar"></div>
 
     <!-- Navegación sticky -->
-    <nav class="nav-sticky" id="stickyNav">
+    <nav class="nav-sticky" id="stickyNav" aria-label="Navegación principal">
         <div class="container">
             <ul class="nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#beneficios">Beneficios</a></li>
                 <li><a href="#presupuesto">Inversión</a></li>
+                <li><a href="#demo">Demo</a></li>
                 <li><a href="#cronograma">Timeline</a></li>
                 <li><a href="#roi">ROI</a></li>
                 <li><a href="#contacto">Contacto</a></li>
@@ -494,7 +600,7 @@
                 <p class="tagline">"Transformando la pasión granate en una experiencia digital de clase mundial"</p>
                 <div class="cta-buttons">
                     <a href="#presupuesto" class="btn btn-primary">💰 Ver Inversión</a>
-                    <a href="#beneficios" class="btn btn-secondary">📊 Conocer Beneficios</a>
+                    <a href="#demo" class="btn btn-secondary">🎬 Ver Mockup</a>
                 </div>
             </div>
         </div>
@@ -691,6 +797,62 @@
         </div>
     </section>
 
+    <!-- Demo / Mockup visual -->
+    <section class="section section-alt" id="demo" aria-labelledby="demo-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="demo-title">🎬 Demo Visual (Mockup)</h2>
+                <p class="section-subtitle">Mini MVP navegable para presentar al directorio: Home, Ficha de producto y Checkout</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="device-card fade-in">
+                    <div class="device-title">Home de Tienda</div>
+                    <div class="device" role="img" aria-label="Mockup de la página Home">
+                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                        <div class="screen">
+                            <div class="skeleton s-img"></div>
+                            <div class="skeleton s-row" style="width: 60%"></div>
+                            <div class="skeleton s-row" style="width: 40%"></div>
+                            <div class="skeleton s-img"></div>
+                            <div class="skeleton s-row" style="width: 55%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="device-card fade-in">
+                    <div class="device-title">Ficha de Producto</div>
+                    <div class="device" role="img" aria-label="Mockup de la ficha de producto">
+                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                        <div class="screen">
+                            <div class="skeleton s-img" style="height: 140px;"></div>
+                            <div class="skeleton s-row" style="width: 70%"></div>
+                            <div class="skeleton s-row" style="width: 30%"></div>
+                            <div class="skeleton s-btn"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="device-card fade-in">
+                    <div class="device-title">Checkout</div>
+                    <div class="device" role="img" aria-label="Mockup de la página de checkout">
+                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                        <div class="screen">
+                            <div class="skeleton s-row" style="width: 80%"></div>
+                            <div class="skeleton s-row" style="width: 90%"></div>
+                            <div class="skeleton s-row" style="width: 85%"></div>
+                            <div class="skeleton s-btn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top: 1.5rem;">
+                <a class="btn btn-primary" href="https://jemiliodev.vercel.app/" target="_blank" rel="noopener">🔗 Ver Portafolio</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Presupuesto -->
     <section class="section" id="presupuesto">
         <div class="container">
@@ -788,6 +950,31 @@
                 <p style="color: var(--text-gray); font-style: italic;">
                     * Valores netos. Para facturación se aplica IVA (19%) • Opciones de pago flexibles disponibles
                 </p>
+            </div>
+
+            <!-- Resumen visual del presupuesto -->
+            <div class="section-header" style="margin-top: 3rem;">
+                <h3 class="section-title" style="font-size: 1.8rem;">🧩 Resumen Visual del Presupuesto</h3>
+                <p class="section-subtitle">Agrupación por áreas para facilitar la exposición al directorio</p>
+            </div>
+
+            <div class="budget-summary">
+                <div class="budget-pill" title="Consultoría, Diseño UX/UI, Capacitación">
+                    <span class="label">Estrategia & UX</span>
+                    <span class="amount">$1.380.000</span>
+                </div>
+                <div class="budget-pill" title="Frontend, Backend, E-commerce Engine">
+                    <span class="label">Desarrollo Core</span>
+                    <span class="amount">$2.090.000</span>
+                </div>
+                <div class="budget-pill" title="Pagos, Logística, Comunicaciones, SEO">
+                    <span class="label">Integraciones & Growth</span>
+                    <span class="amount">$1.280.000</span>
+                </div>
+                <div class="budget-pill" title="Testing, Gestión de Proyecto, Carga de Catálogo">
+                    <span class="label">Operación & Calidad</span>
+                    <span class="amount">$1.150.000</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1028,30 +1215,30 @@
             <p>La Tienda Granate será el salto digital que posicionará al Club Deportes La Serena en la primera línea del fútbol nacional</p>
             
             <div class="cta-buttons" style="margin: 2rem 0;">
-                <a href="mailto:proyectos@desarrollo.cl" class="btn btn-primary">📧 Coordinar Reunión</a>
-                <a href="tel:+569XXXXXXXX" class="btn btn-secondary">📞 Llamar Ahora</a>
+                <a href="mailto:J.12.ELGUEDA@GMAIL.COM?subject=Tienda%20Granate%20-%20Propuesta&body=Hola%20Juan%20Emilio%2C%20quiero%20coordinar%20una%20reuni%C3%B3n%20por%20la%20Tienda%20Granate." class="btn btn-primary">📧 Coordinar Reunión</a>
+                <a href="tel:+56991336534" class="btn btn-secondary">📞 Llamar Ahora</a>
             </div>
 
             <div class="contact-info">
                 <div class="contact-card">
-                    <h4>📊 Gestión de Proyecto</h4>
-                    <p>Email: proyectos@desarrollo.cl</p>
-                    <p>Teléfono: +56 9 XXXX XXXX</p>
-                    <p>Horario: Lunes a Viernes, 9:00-18:00</p>
+                    <h4>👤 Contacto Directo</h4>
+                    <p><strong>JUAN EMILIO ELGUEDA LILLO</strong></p>
+                    <p>Email: <a href="mailto:J.12.ELGUEDA@GMAIL.COM">J.12.ELGUEDA@GMAIL.COM</a></p>
+                    <p>Teléfono: <a href="tel:+56991336534">+56 9 9133 6534</a></p>
                 </div>
 
                 <div class="contact-card">
-                    <h4>⚙️ Consultas Técnicas</h4>
-                    <p>Email: tecnico@desarrollo.cl</p>
-                    <p>Reuniones presenciales en La Serena</p>
-                    <p>Demos y presentaciones personalizadas</p>
+                    <h4>🖥️ Portafolio</h4>
+                    <p>Sitio: <a href="https://jemiliodev.vercel.app/" target="_blank" rel="noopener">jemiliodev.vercel.app</a></p>
+                    <p>Ubicación: Reuniones presenciales en La Serena</p>
+                    <p>Disponibilidad: Lunes a Viernes, 9:00–18:00</p>
                 </div>
 
                 <div class="contact-card">
-                    <h4>🚨 Urgencias</h4>
-                    <p>WhatsApp: +56 9 XXXX XXXX (24/7)</p>
-                    <p>Respuesta inmediata</p>
-                    <p>Disponibilidad total para el proyecto</p>
+                    <h4>💬 WhatsApp</h4>
+                    <p><a href="https://wa.me/56991336534?text=Hola%20Juan%20Emilio%2C%20me%20interesa%20la%20Tienda%20Granate" target="_blank" rel="noopener">Chatear por WhatsApp</a></p>
+                    <p>Respuesta rápida</p>
+                    <p>Atención personalizada</p>
                 </div>
             </div>
 
@@ -1093,14 +1280,14 @@
             } else {
                 stickyNav.classList.remove('visible');
             }
-        });
+        }, { passive: true });
 
         // Progress bar
         const progressBar = document.getElementById('progressBar');
         window.addEventListener('scroll', () => {
             const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             progressBar.style.width = scrolled + '%';
-        });
+        }, { passive: true });
 
         // Smooth scroll para navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1108,8 +1295,9 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
+                    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                     target.scrollIntoView({
-                        behavior: 'smooth',
+                        behavior: prefersReduced ? 'auto' : 'smooth',
                         block: 'start'
                     });
                 }
