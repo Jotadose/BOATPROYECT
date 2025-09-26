@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Demo - BoatProyect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e2a38;
+      --secondary: #00bfae;
+      --accent: #f7c948;
+      --bg: #f4f8fb;
+      --white: #fff;
+      --shadow: 0 4px 24px rgba(30,42,56,0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+    }
+    .mockup-demo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, var(--primary) 60%, var(--secondary) 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .mockup-demo-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 300px; height: 300px;
+      background: url('https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257') no-repeat center/cover;
+      opacity: 0.08;
+      border-radius: 50%;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
+    .mockup-content {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      width: 100%;
+      background: var(--white);
+      border-radius: 2rem;
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .mockup-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,191,174,0.15);
+      animation: popIn 1s cubic-bezier(.23,1.01,.32,1) 0.3s both;
+    }
+    .mockup-logo img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .mockup-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .mockup-desc {
+      font-size: 1.1rem;
+      color: #4a5a6a;
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .mockup-interactive {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .mockup-card {
+      width: 100%;
+      max-width: 350px;
+      background: var(--secondary);
+      color: var(--white);
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 12px rgba(0,191,174,0.10);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s;
+      animation: fadeInCard 1.2s cubic-bezier(.23,1.01,.32,1) both;
+    }
+    .mockup-card:hover {
+      transform: translateY(-8px) scale(1.03) rotate(-1deg);
+      box-shadow: 0 8px 32px rgba(0,191,174,0.18);
+      background: linear-gradient(120deg, var(--secondary) 80%, var(--accent) 100%);
+    }
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .mockup-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.7rem;
+      transition: color 0.3s;
+    }
+    .mockup-card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .mockup-card-desc {
+      font-size: 1rem;
+      opacity: 0.9;
+      text-align: center;
+    }
+    .mockup-card.active {
+      background: linear-gradient(120deg, var(--accent) 80%, var(--secondary) 100%);
+      color: var(--primary);
+      box-shadow: 0 8px 32px rgba(247,201,72,0.18);
+      transform: scale(1.05);
+    }
+    @media (max-width: 600px) {
+      .mockup-content {
+        padding: 1.2rem 0.5rem;
+        border-radius: 1.2rem;
+      }
+      .mockup-title {
+        font-size: 1.3rem;
+      }
+      .mockup-card {
+        padding: 1rem 0.5rem;
+        border-radius: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="mockup-demo-section">
+    <div class="mockup-content">
+      <div class="mockup-logo">
+        <img src="https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257" alt="BoatProyect Logo">
+      </div>
+      <div class="mockup-title">Demo Interactiva</div>
+      <div class="mockup-desc">
+        Explora la experiencia BoatProyect: diseño moderno, animaciones suaves y total adaptabilidad. Haz clic en las tarjetas para interactuar.
+      </div>
+      <div class="mockup-interactive">
+        <div class="mockup-card" onclick="activateCard(this)">
+          <div class="mockup-card-icon">⛵</div>
+          <div class="mockup-card-title">Reserva tu viaje</div>
+          <div class="mockup-card-desc">Simula el proceso de reserva con un solo clic.</div>
+        </div>
+        <div class="mockup-card" onclick="activateCard(this)">
+          <div class="mockup-card-icon">🌊</div>
+          <div class="mockup-card-title">Explora destinos</div>
+          <div class="mockup-card-desc">Descubre rutas y experiencias únicas en el mar.</div>
+        </div>
+        <div class="mockup-card" onclick="activateCard(this)">
+          <div class="mockup-card-icon">💬</div>
+          <div class="mockup-card-title">Atención personalizada</div>
+          <div class="mockup-card-desc">Interactúa con nuestro equipo en tiempo real.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function activateCard(card) {
+      document.querySelectorAll('.mockup-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      card.animate([
+        { boxShadow: '0 8px 32px rgba(247,201,72,0.18)', transform: 'scale(1.05)' },
+        { boxShadow: '0 2px 12px rgba(0,191,174,0.10)', transform: 'scale(1)' }
+      ], {
+        duration: 600,
+        easing: 'cubic-bezier(.23,1.01,.32,1)'
+      });
+      setTimeout(() => card.classList.remove('active'), 1200);
+    }
+  </script>
+</body>
+</html>
