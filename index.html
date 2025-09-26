@@ -500,6 +500,23 @@
             .timeline-marker { left: 20px; }
             .nav-menu { flex-direction: column; gap: 1rem; }
             .cta-buttons { flex-direction: column; align-items: center; }
+            
+            /* Mockup responsive */
+            .mockup-demo-section { padding: 2rem 0; }
+            .mockup-content {
+                padding: 1.5rem 1rem;
+                border-radius: 1.2rem;
+                margin: 0 1rem;
+            }
+            .mockup-title { font-size: 1.6rem; }
+            .mockup-desc { font-size: 1rem; }
+            .mockup-card {
+                padding: 1.2rem 0.8rem;
+                border-radius: 1rem;
+            }
+            .mockup-card-icon { font-size: 2rem; }
+            .mockup-card-title { font-size: 1.1rem; }
+            .mockup-card-desc { font-size: 0.9rem; }
         }
 
         /* Progress bar */
@@ -513,42 +530,135 @@
             transition: width 0.1s ease;
         }
 
-        /* Demo / Mockup estilos */
-        .demo-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        /* Demo / Mockup estilos modernos */
+        .mockup-demo-section {
+            background: linear-gradient(135deg, var(--granate-primary) 60%, var(--granate-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 0;
         }
-        .device-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 1rem;
+        .mockup-demo-section::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: -100px;
+            width: 300px; height: 300px;
+            background: url('https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257') no-repeat center/cover;
+            opacity: 0.08;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite alternate;
         }
-        .device-title {
-            font-weight: 600;
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+        .mockup-content {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-hover);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .mockup-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--granate-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(166,30,66,0.15);
+            animation: popIn 1s cubic-bezier(.23,1.01,.32,1) 0.3s both;
+        }
+        .mockup-logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .mockup-title {
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--granate-primary);
             margin-bottom: 0.5rem;
+            text-align: center;
+            letter-spacing: 0.01em;
         }
-        .device {
-            border: 1px solid #e6e6e6;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fafafa;
+        .mockup-desc {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
-        .device .browser-bar {
+        .mockup-interactive {
+            width: 100%;
             display: flex;
-            gap: 6px;
-            padding: 8px 10px;
-            background: #efefef;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
-        .device .dot { width: 10px; height: 10px; border-radius: 50%; background: #d2d2d2; }
-        .device .screen { padding: 14px; }
-        .skeleton { background: #eee; border-radius: 6px; }
-        .s-row { height: 12px; margin-bottom: 10px; }
-        .s-img { height: 120px; margin-bottom: 10px; }
-        .s-btn { height: 36px; width: 100%; }
+        .mockup-card {
+            width: 100%;
+            max-width: 350px;
+            background: var(--granate-secondary);
+            color: var(--white);
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(166,30,66,0.10);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(.23,1.01,.32,1), box-shadow 0.3s;
+            animation: fadeInCard 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .mockup-card:hover {
+            transform: translateY(-8px) scale(1.03) rotate(-1deg);
+            box-shadow: 0 8px 32px rgba(166,30,66,0.18);
+            background: linear-gradient(120deg, var(--granate-secondary) 80%, var(--gold-accent) 100%);
+        }
+        @keyframes fadeInCard {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .mockup-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+            transition: color 0.3s;
+        }
+        .mockup-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .mockup-card-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            text-align: center;
+        }
+        .mockup-card.active {
+            background: linear-gradient(120deg, var(--gold-accent) 80%, var(--granate-secondary) 100%);
+            color: var(--granate-dark);
+            box-shadow: 0 8px 32px rgba(255,215,0,0.18);
+            transform: scale(1.05);
+        }
 
         /* Resumen visual presupuesto */
         .budget-summary {
@@ -797,75 +907,42 @@
         </div>
     </section>
 
-    <!-- Demo / Mockup visual -->
-   <section class="section section-alt" id="demo">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">🎬 Demo Visual (Componentes)</h2>
-      <p class="section-subtitle">Vista previa real de la Tienda Granate</p>
-    </div>
-
-    <div class="demo-wrapper">
-      <!-- Home de Tienda -->
-      <div class="device-card fade-in">
-        <div class="device-title">Home de Tienda</div>
-        <div class="device screen">
-          <div class="hero-banner" style="background:linear-gradient(135deg,#8B1538,#5D0F26);color:white;padding:1.5rem;border-radius:12px;">
-            <h3 style="margin:0;">¡Bienvenido a la Tienda Granate!</h3>
-            <p>Merchandising oficial del Club</p>
-            <button class="btn btn-primary">Ver Productos</button>
-          </div>
-          <div class="products-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem;">
-            <div class="product-card">
-              <img src="https://via.placeholder.com/150" alt="Producto" style="width:100%;border-radius:8px;">
-              <h4>Polera Granate</h4>
-              <p class="price">$19.900</p>
+    <!-- Demo / Mockup visual interactivo -->
+    <section class="section mockup-demo-section" id="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: var(--white);">🎬 Demo Interactiva</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Experiencia visual moderna de la Tienda Granate</p>
             </div>
-            <div class="product-card">
-              <img src="https://via.placeholder.com/150" alt="Producto" style="width:100%;border-radius:8px;">
-              <h4>Bufanda Oficial</h4>
-              <p class="price">$12.500</p>
+            
+            <div class="mockup-content">
+                <div class="mockup-logo">
+                    <img src="https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257" alt="Club Deportes La Serena">
+                </div>
+                <div class="mockup-title">Tienda Granate</div>
+                <div class="mockup-desc">
+                    Explora la experiencia de compra moderna: diseño responsivo, animaciones suaves y total adaptabilidad. Haz clic en las tarjetas para interactuar.
+                </div>
+                <div class="mockup-interactive">
+                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
+                        <div class="mockup-card-icon">🛍️</div>
+                        <div class="mockup-card-title">Catálogo de Productos</div>
+                        <div class="mockup-card-desc">Navega por el merchandising oficial del club con filtros inteligentes.</div>
+                    </div>
+                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
+                        <div class="mockup-card-icon">💳</div>
+                        <div class="mockup-card-title">Checkout Seguro</div>
+                        <div class="mockup-card-desc">Proceso de compra optimizado con múltiples métodos de pago.</div>
+                    </div>
+                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
+                        <div class="mockup-card-icon">📱</div>
+                        <div class="mockup-card-title">Experiencia Mobile</div>
+                        <div class="mockup-card-desc">Diseño adaptable para una experiencia perfecta en todos los dispositivos.</div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-
-      <!-- Ficha de Producto -->
-      <div class="device-card fade-in">
-        <div class="device-title">Ficha de Producto</div>
-        <div class="device screen">
-          <img src="https://via.placeholder.com/250x200" alt="Producto" style="width:100%;border-radius:12px;">
-          <h3 style="color:#8B1538;margin:0.5rem 0;">Camiseta Oficial 2025</h3>
-          <p style="font-size:1.2rem;font-weight:bold;color:#FFD700;">$29.900</p>
-          <label for="size">Talla:</label>
-          <select id="size" style="margin-bottom:1rem;width:100%;padding:0.5rem;border-radius:6px;">
-            <option>S</option><option>M</option><option>L</option><option>XL</option>
-          </select>
-          <button class="btn btn-primary" style="width:100%;">Agregar al Carrito</button>
-        </div>
-      </div>
-
-      <!-- Checkout -->
-      <div class="device-card fade-in">
-        <div class="device-title">Checkout</div>
-        <div class="device screen">
-          <h3 style="color:#8B1538;margin-bottom:0.5rem;">Resumen de Compra</h3>
-          <ul style="list-style:none;padding:0;margin:0 0 1rem 0;">
-            <li>Polera Granate — $19.900</li>
-            <li>Bufanda Oficial — $12.500</li>
-          </ul>
-          <p><strong>Total:</strong> <span style="color:#FFD700;">$32.400</span></p>
-          <form style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem;">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="text" placeholder="Dirección" required>
-            <button class="btn btn-primary">Confirmar Compra</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     
     <!-- Presupuesto -->
@@ -1381,6 +1458,28 @@
             };
             
             setTimeout(typeWriter, 2000);
+        }
+
+        // Funcionalidad del mockup interactivo 
+        function activateCard(card) {
+            document.querySelectorAll('.mockup-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            card.animate([
+                { boxShadow: '0 8px 32px rgba(255,215,0,0.18)', transform: 'scale(1.05)' },
+                { boxShadow: '0 2px 12px rgba(166,30,66,0.10)', transform: 'scale(1)' }
+            ], {
+                duration: 600,
+                easing: 'cubic-bezier(.23,1.01,.32,1)'
+            });
+            setTimeout(() => card.classList.remove('active'), 1200);
+        }
+
+        // Manejo de teclas para accesibilidad
+        function handleKeyPress(event, card) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                activateCard(card);
+            }
         }
     </script>
 </body>
