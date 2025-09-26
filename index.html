@@ -517,6 +517,40 @@
             .mockup-card-icon { font-size: 2rem; }
             .mockup-card-title { font-size: 1.1rem; }
             .mockup-card-desc { font-size: 0.9rem; }
+            
+            /* MVP Responsive */
+            .mvp-nav { 
+                flex-wrap: wrap; 
+                gap: 0.5rem; 
+            }
+            .nav-btn { 
+                padding: 0.5rem 1rem; 
+                font-size: 0.9rem; 
+            }
+            .catalog-container, 
+            .cart-container, 
+            .checkout-container, 
+            .product-detail, 
+            .success-container { 
+                margin: 0 0.5rem; 
+                padding: 1.5rem 1rem; 
+            }
+            .products-grid { 
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+                gap: 1rem; 
+            }
+            .product-card { 
+                padding: 0.8rem; 
+            }
+            .product-card img, 
+            .product-placeholder { 
+                height: 120px; 
+            }
+            .catalog-title, 
+            .cart-title, 
+            .checkout-title { 
+                font-size: 1.4rem; 
+            }
         }
 
         /* Progress bar */
@@ -658,6 +692,355 @@
             color: var(--granate-dark);
             box-shadow: 0 8px 32px rgba(255,215,0,0.18);
             transform: scale(1.05);
+        }
+
+        /* MVP Estilos */
+        .mvp-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        .nav-btn {
+            background: var(--white);
+            border: 2px solid var(--granate-primary);
+            color: var(--granate-primary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-btn.active {
+            background: var(--granate-primary);
+            color: var(--white);
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139,21,56,0.2);
+        }
+        #cart-count {
+            background: var(--gold-accent);
+            color: var(--granate-dark);
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            display: inline-block;
+            min-width: 1.2rem;
+            text-align: center;
+        }
+        .mvp-view {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        .mvp-view.active {
+            display: block;
+            animation: fadeInUp 0.5s ease both;
+        }
+        .btn-primary-mvp {
+            background: var(--granate-secondary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        .btn-primary-mvp:hover {
+            background: var(--granate-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139,21,56,0.3);
+        }
+
+        /* Catálogo */
+        .catalog-container {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-hover);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .catalog-title {
+            text-align: center;
+            color: var(--granate-primary);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--granate-secondary);
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .product-placeholder {
+            height: 150px;
+            background: var(--bg-light);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .product-info h4 {
+            color: var(--granate-primary);
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        .product-price {
+            color: var(--gold-accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 0 1rem 0;
+        }
+        .btn-add-cart {
+            background: var(--granate-secondary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-add-cart:hover {
+            background: var(--granate-primary);
+            transform: scale(1.05);
+        }
+
+        /* Producto Individual */
+        .product-detail {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-hover);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .btn-back {
+            background: var(--bg-light);
+            border: 1px solid var(--text-gray);
+            color: var(--text-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-back:hover {
+            background: var(--granate-primary);
+            color: var(--white);
+            border-color: var(--granate-primary);
+        }
+
+        /* Carrito */
+        .cart-container {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-hover);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .cart-title {
+            text-align: center;
+            color: var(--granate-primary);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-gray);
+        }
+        .empty-cart p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--bg-light);
+            gap: 1rem;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--granate-primary);
+        }
+        .cart-item-price {
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qty-btn {
+            background: var(--granate-secondary);
+            color: var(--white);
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .cart-total {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--granate-primary);
+            border-top: 2px solid var(--bg-light);
+            margin-top: 1rem;
+        }
+        .btn-checkout {
+            background: var(--gold-accent);
+            color: var(--granate-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.3);
+        }
+
+        /* Checkout */
+        .checkout-container {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-hover);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .checkout-title {
+            text-align: center;
+            color: var(--granate-primary);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            color: var(--granate-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--granate-secondary);
+        }
+        .order-summary {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+        .order-summary h4 {
+            color: var(--granate-primary);
+            margin: 0 0 1rem 0;
+        }
+        .checkout-total {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--granate-primary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--text-gray);
+        }
+        .btn-finalize {
+            background: var(--granate-primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-finalize:hover {
+            background: var(--granate-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139,21,56,0.3);
+        }
+
+        /* Confirmación */
+        .success-container {
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-hover);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .success-container h3 {
+            color: var(--granate-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .success-container p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
         /* Resumen visual presupuesto */
@@ -915,30 +1298,144 @@
                 <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Experiencia visual moderna de la Tienda Granate</p>
             </div>
             
-            <div class="mockup-content">
-                <div class="mockup-logo">
-                    <img src="https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257" alt="Club Deportes La Serena">
+            <!-- Navegación del MVP -->
+            <div class="mvp-nav">
+                <button class="nav-btn active" onclick="showView('home')">🏠 Inicio</button>
+                <button class="nav-btn" onclick="showView('catalog')">🛍️ Catálogo</button>
+                <button class="nav-btn" onclick="showView('cart')">🛒 Carrito <span id="cart-count">0</span></button>
+            </div>
+
+            <!-- Vista Home -->
+            <div id="view-home" class="mvp-view active">
+                <div class="mockup-content">
+                    <div class="mockup-logo">
+                        <img src="https://ticketing-uploads-1.ticketplus.global/themes/55/assets/serena-0e3de28f852be32e2bca6f2d07505851ca1cd96e.jpg?1692222257" alt="Club Deportes La Serena">
+                    </div>
+                    <div class="mockup-title">Tienda Granate MVP</div>
+                    <div class="mockup-desc">
+                        Mini prototipo funcional - Simula una compra completa navegando por el catálogo
+                    </div>
+                    <button class="btn-primary-mvp" onclick="showView('catalog')">🛍️ Explorar Catálogo</button>
                 </div>
-                <div class="mockup-title">Tienda Granate</div>
-                <div class="mockup-desc">
-                    Explora la experiencia de compra moderna: diseño responsivo, animaciones suaves y total adaptabilidad. Haz clic en las tarjetas para interactuar.
+            </div>
+
+            <!-- Vista Catálogo -->
+            <div id="view-catalog" class="mvp-view">
+                <div class="catalog-container">
+                    <h3 class="catalog-title">🛍️ Merchandising Oficial</h3>
+                    <div class="products-grid">
+                        <div class="product-card" onclick="showProduct(1)">
+                            <img src="https://ticketing-uploads-1.ticketplus.global/images/attachment/product/475423ed0b93648ae1d64190be6bf6b09353d905.png?1703265066" alt="Camiseta La Serena">
+                            <div class="product-info">
+                                <h4>Camiseta Oficial 2025</h4>
+                                <p class="product-price">$35.990</p>
+                                <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(1)">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="showProduct(2)">
+                            <img src="https://ticketing-uploads-1.ticketplus.global/images/attachment/product/ff9356e652b862776bf9d3a295cd06f419dad246.png?1686255204" alt="Polera La Serena">
+                            <div class="product-info">
+                                <h4>Polera Clásica Granate</h4>
+                                <p class="product-price">$24.990</p>
+                                <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(2)">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="showProduct(3)">
+                            <div class="product-placeholder">
+                                <span style="font-size: 3rem;">🧣</span>
+                            </div>
+                            <div class="product-info">
+                                <h4>Bufanda Oficial</h4>
+                                <p class="product-price">$18.990</p>
+                                <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(3)">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="showProduct(4)">
+                            <div class="product-placeholder">
+                                <span style="font-size: 3rem;">🧢</span>
+                            </div>
+                            <div class="product-info">
+                                <h4>Gorra Granate</h4>
+                                <p class="product-price">$15.990</p>
+                                <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(4)">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mockup-interactive">
-                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
-                        <div class="mockup-card-icon">🛍️</div>
-                        <div class="mockup-card-title">Catálogo de Productos</div>
-                        <div class="mockup-card-desc">Navega por el merchandising oficial del club con filtros inteligentes.</div>
+            </div>
+
+            <!-- Vista Producto Individual -->
+            <div id="view-product" class="mvp-view">
+                <div class="product-detail">
+                    <button class="btn-back" onclick="showView('catalog')">← Volver al catálogo</button>
+                    <div id="product-detail-content">
+                        <!-- Contenido dinámico -->
                     </div>
-                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
-                        <div class="mockup-card-icon">💳</div>
-                        <div class="mockup-card-title">Checkout Seguro</div>
-                        <div class="mockup-card-desc">Proceso de compra optimizado con múltiples métodos de pago.</div>
+                </div>
+            </div>
+
+            <!-- Vista Carrito -->
+            <div id="view-cart" class="mvp-view">
+                <div class="cart-container">
+                    <h3 class="cart-title">🛒 Mi Carrito</h3>
+                    <div id="cart-items">
+                        <div class="empty-cart">
+                            <span style="font-size: 3rem;">🛒</span>
+                            <p>Tu carrito está vacío</p>
+                            <button class="btn-primary-mvp" onclick="showView('catalog')">Ir a comprar</button>
+                        </div>
                     </div>
-                    <div class="mockup-card" role="button" tabindex="0" onclick="activateCard(this)" onkeypress="handleKeyPress(event, this)">
-                        <div class="mockup-card-icon">📱</div>
-                        <div class="mockup-card-title">Experiencia Mobile</div>
-                        <div class="mockup-card-desc">Diseño adaptable para una experiencia perfecta en todos los dispositivos.</div>
+                    <div id="cart-summary" style="display: none;">
+                        <div class="cart-total">
+                            <strong>Total: $<span id="total-amount">0</span></strong>
+                        </div>
+                        <button class="btn-checkout" onclick="showCheckout()">Proceder al Checkout</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- Vista Checkout -->
+            <div id="view-checkout" class="mvp-view">
+                <div class="checkout-container">
+                    <h3 class="checkout-title">💳 Finalizar Compra</h3>
+                    <form id="checkout-form" onsubmit="finalizePurchase(event)">
+                        <div class="form-group">
+                            <label>Nombre completo</label>
+                            <input type="text" required placeholder="Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" required placeholder="juan@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" required placeholder="+56 9 1234 5678">
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección de entrega</label>
+                            <input type="text" required placeholder="Av. Francisco de Aguirre 389, La Serena">
+                        </div>
+                        <div class="order-summary">
+                            <h4>Resumen del pedido:</h4>
+                            <div id="checkout-items"></div>
+                            <div class="checkout-total">
+                                <strong>Total: $<span id="checkout-total">0</span></strong>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-finalize">🎉 Finalizar Compra</button>
+                        <button type="button" class="btn-back" onclick="showView('cart')">← Volver al carrito</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Vista Confirmación -->
+            <div id="view-success" class="mvp-view">
+                <div class="success-container">
+                    <div class="success-icon">✅</div>
+                    <h3>¡Compra Exitosa!</h3>
+                    <p>Tu pedido ha sido procesado correctamente</p>
+                    <p><strong>Número de orden:</strong> #LS2025<span id="order-number"></span></p>
+                    <button class="btn-primary-mvp" onclick="resetMVP()">Nueva Compra</button>
                 </div>
             </div>
         </div>
@@ -1460,27 +1957,243 @@
             setTimeout(typeWriter, 2000);
         }
 
-        // Funcionalidad del mockup interactivo 
-        function activateCard(card) {
-            document.querySelectorAll('.mockup-card').forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-            card.animate([
-                { boxShadow: '0 8px 32px rgba(255,215,0,0.18)', transform: 'scale(1.05)' },
-                { boxShadow: '0 2px 12px rgba(166,30,66,0.10)', transform: 'scale(1)' }
-            ], {
-                duration: 600,
-                easing: 'cubic-bezier(.23,1.01,.32,1)'
+        // MVP Funcional - Sistema de e-commerce
+        let cart = [];
+        let currentView = 'home';
+
+        const products = [
+            {
+                id: 1,
+                name: 'Camiseta Oficial 2025',
+                price: 35990,
+                image: 'https://ticketing-uploads-1.ticketplus.global/images/attachment/product/475423ed0b93648ae1d64190be6bf6b09353d905.png?1703265066',
+                description: 'Camiseta oficial del Club Deportes La Serena temporada 2025. Diseño exclusivo con los colores tradicionales.',
+                sizes: ['S', 'M', 'L', 'XL', 'XXL']
+            },
+            {
+                id: 2,
+                name: 'Polera Clásica Granate',
+                price: 24990,
+                image: 'https://ticketing-uploads-1.ticketplus.global/images/attachment/product/ff9356e652b862776bf9d3a295cd06f419dad246.png?1686255204',
+                description: 'Polera casual con el escudo bordado. Perfecta para el día a día o para asistir al estadio.',
+                sizes: ['S', 'M', 'L', 'XL']
+            },
+            {
+                id: 3,
+                name: 'Bufanda Oficial',
+                price: 18990,
+                image: null,
+                description: 'Bufanda tejida con los colores granate y oro. Ideal para los días fríos en el estadio.',
+                sizes: ['Única']
+            },
+            {
+                id: 4,
+                name: 'Gorra Granate',
+                price: 15990,
+                image: null,
+                description: 'Gorra ajustable con bordado del escudo. Protección solar con estilo.',
+                sizes: ['Única']
+            }
+        ];
+
+        function showView(viewName) {
+            // Ocultar todas las vistas
+            document.querySelectorAll('.mvp-view').forEach(view => {
+                view.classList.remove('active');
             });
-            setTimeout(() => card.classList.remove('active'), 1200);
+            
+            // Actualizar navegación
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar vista solicitada
+            document.getElementById(`view-${viewName}`).classList.add('active');
+            
+            // Activar botón correspondiente
+            if (viewName !== 'product' && viewName !== 'checkout' && viewName !== 'success') {
+                document.querySelector(`[onclick="showView('${viewName}')"]`).classList.add('active');
+            }
+            
+            currentView = viewName;
         }
 
-        // Manejo de teclas para accesibilidad
-        function handleKeyPress(event, card) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                activateCard(card);
+        function showProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const content = `
+                <div class="product-detail-content">
+                    ${product.image ? 
+                        `<img src="${product.image}" alt="${product.name}" style="width: 100%; max-width: 300px; border-radius: 1rem; margin-bottom: 1.5rem;">` :
+                        `<div class="product-placeholder" style="max-width: 300px; margin: 0 auto 1.5rem auto;">
+                            <span style="font-size: 4rem;">${product.id === 3 ? '🧣' : '🧢'}</span>
+                        </div>`
+                    }
+                    <h2 style="color: var(--granate-primary); margin-bottom: 0.5rem;">${product.name}</h2>
+                    <p style="font-size: 1.5rem; color: var(--gold-accent); font-weight: 700; margin-bottom: 1rem;">$${product.price.toLocaleString()}</p>
+                    <p style="color: var(--text-gray); margin-bottom: 1.5rem; line-height: 1.6;">${product.description}</p>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: var(--granate-primary); font-weight: 600; margin-bottom: 0.5rem;">Talla:</label>
+                        <select id="size-select" style="width: 100%; padding: 0.8rem; border: 2px solid var(--bg-light); border-radius: 0.5rem; font-size: 1rem;">
+                            ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                        </select>
+                    </div>
+                    
+                    <button class="btn-primary-mvp" onclick="addToCartFromDetail(${product.id})" style="width: 100%;">
+                        🛒 Agregar al Carrito - $${product.price.toLocaleString()}
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('product-detail-content').innerHTML = content;
+            showView('product');
+        }
+
+        function addToCart(productId, size = null) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const selectedSize = size || product.sizes[0];
+            const existingItem = cart.find(item => item.id === productId && item.size === selectedSize);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    size: selectedSize,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            
+            // Animación de feedback
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Agregado';
+            btn.style.background = '#4CAF50';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 1000);
+        }
+
+        function addToCartFromDetail(productId) {
+            const sizeSelect = document.getElementById('size-select');
+            const selectedSize = sizeSelect ? sizeSelect.value : null;
+            addToCart(productId, selectedSize);
+        }
+
+        function removeFromCart(productId, size) {
+            cart = cart.filter(item => !(item.id === productId && item.size === size));
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, size, change) {
+            const item = cart.find(item => item.id === productId && item.size === size);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId, size);
+                } else {
+                    updateCartUI();
+                }
             }
         }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartSummary = document.getElementById('cart-summary');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <span style="font-size: 3rem;">🛒</span>
+                        <p>Tu carrito está vacío</p>
+                        <button class="btn-primary-mvp" onclick="showView('catalog')">Ir a comprar</button>
+                    </div>
+                `;
+                cartSummary.style.display = 'none';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        ${item.image ? 
+                            `<img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 0.5rem;">` :
+                            `<div style="width: 60px; height: 60px; background: var(--bg-light); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">${item.id === 3 ? '🧣' : '🧢'}</div>`
+                        }
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>Talla: ${item.size}</p>
+                            <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="cart-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, '${item.size}', -1)">-</button>
+                            <span style="padding: 0 0.5rem; font-weight: 600;">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, '${item.size}', 1)">+</button>
+                            <button onclick="removeFromCart(${item.id}, '${item.size}')" style="margin-left: 0.5rem; background: #f44336; color: white; border: none; padding: 0.3rem 0.6rem; border-radius: 0.3rem; cursor: pointer;">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('total-amount').textContent = totalAmount.toLocaleString();
+                cartSummary.style.display = 'block';
+            }
+        }
+
+        function showCheckout() {
+            const checkoutItems = document.getElementById('checkout-items');
+            const checkoutTotal = document.getElementById('checkout-total');
+            
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            checkoutItems.innerHTML = cart.map(item => `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>${item.name} (${item.size}) x${item.quantity}</span>
+                    <span>$${(item.price * item.quantity).toLocaleString()}</span>
+                </div>
+            `).join('');
+            
+            checkoutTotal.textContent = totalAmount.toLocaleString();
+            showView('checkout');
+        }
+
+        function finalizePurchase(event) {
+            event.preventDefault();
+            
+            // Generar número de orden
+            const orderNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            document.getElementById('order-number').textContent = orderNumber;
+            
+            // Resetear carrito
+            cart = [];
+            updateCartUI();
+            
+            // Mostrar confirmación
+            showView('success');
+        }
+
+        function resetMVP() {
+            cart = [];
+            updateCartUI();
+            showView('home');
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartUI();
+        });
     </script>
 </body>
 </html>
