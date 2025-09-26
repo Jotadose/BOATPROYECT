@@ -798,61 +798,76 @@
     </section>
 
     <!-- Demo / Mockup visual -->
-    <section class="section section-alt" id="demo" aria-labelledby="demo-title">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" id="demo-title">🎬 Demo Visual (Mockup)</h2>
-                <p class="section-subtitle">Mini MVP navegable: Home, Ficha de producto y Checkout</p>
+   <section class="section section-alt" id="demo">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🎬 Demo Visual (Componentes)</h2>
+      <p class="section-subtitle">Vista previa real de la Tienda Granate</p>
+    </div>
+
+    <div class="demo-wrapper">
+      <!-- Home de Tienda -->
+      <div class="device-card fade-in">
+        <div class="device-title">Home de Tienda</div>
+        <div class="device screen">
+          <div class="hero-banner" style="background:linear-gradient(135deg,#8B1538,#5D0F26);color:white;padding:1.5rem;border-radius:12px;">
+            <h3 style="margin:0;">¡Bienvenido a la Tienda Granate!</h3>
+            <p>Merchandising oficial del Club</p>
+            <button class="btn btn-primary">Ver Productos</button>
+          </div>
+          <div class="products-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem;">
+            <div class="product-card">
+              <img src="https://via.placeholder.com/150" alt="Producto" style="width:100%;border-radius:8px;">
+              <h4>Polera Granate</h4>
+              <p class="price">$19.900</p>
             </div>
-
-            <div class="demo-wrapper">
-                <div class="device-card fade-in">
-                    <div class="device-title">Home de Tienda</div>
-                    <div class="device" role="img" aria-label="Mockup de la página Home">
-                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-                        <div class="screen">
-                            <div class="skeleton s-img"></div>
-                            <div class="skeleton s-row" style="width: 60%"></div>
-                            <div class="skeleton s-row" style="width: 40%"></div>
-                            <div class="skeleton s-img"></div>
-                            <div class="skeleton s-row" style="width: 55%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="device-card fade-in">
-                    <div class="device-title">Ficha de Producto</div>
-                    <div class="device" role="img" aria-label="Mockup de la ficha de producto">
-                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-                        <div class="screen">
-                            <div class="skeleton s-img" style="height: 140px;"></div>
-                            <div class="skeleton s-row" style="width: 70%"></div>
-                            <div class="skeleton s-row" style="width: 30%"></div>
-                            <div class="skeleton s-btn"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="device-card fade-in">
-                    <div class="device-title">Checkout</div>
-                    <div class="device" role="img" aria-label="Mockup de la página de checkout">
-                        <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-                        <div class="screen">
-                            <div class="skeleton s-row" style="width: 80%"></div>
-                            <div class="skeleton s-row" style="width: 90%"></div>
-                            <div class="skeleton s-row" style="width: 85%"></div>
-                            <div class="skeleton s-btn"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="product-card">
+              <img src="https://via.placeholder.com/150" alt="Producto" style="width:100%;border-radius:8px;">
+              <h4>Bufanda Oficial</h4>
+              <p class="price">$12.500</p>
             </div>
-
-            <div style="text-align:center; margin-top: 1.5rem;">
-                <a class="btn btn-primary" href="https://jemiliodev.vercel.app/" target="_blank" rel="noopener">🔗 Ver Portafolio</a>
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
+      <!-- Ficha de Producto -->
+      <div class="device-card fade-in">
+        <div class="device-title">Ficha de Producto</div>
+        <div class="device screen">
+          <img src="https://via.placeholder.com/250x200" alt="Producto" style="width:100%;border-radius:12px;">
+          <h3 style="color:#8B1538;margin:0.5rem 0;">Camiseta Oficial 2025</h3>
+          <p style="font-size:1.2rem;font-weight:bold;color:#FFD700;">$29.900</p>
+          <label for="size">Talla:</label>
+          <select id="size" style="margin-bottom:1rem;width:100%;padding:0.5rem;border-radius:6px;">
+            <option>S</option><option>M</option><option>L</option><option>XL</option>
+          </select>
+          <button class="btn btn-primary" style="width:100%;">Agregar al Carrito</button>
+        </div>
+      </div>
+
+      <!-- Checkout -->
+      <div class="device-card fade-in">
+        <div class="device-title">Checkout</div>
+        <div class="device screen">
+          <h3 style="color:#8B1538;margin-bottom:0.5rem;">Resumen de Compra</h3>
+          <ul style="list-style:none;padding:0;margin:0 0 1rem 0;">
+            <li>Polera Granate — $19.900</li>
+            <li>Bufanda Oficial — $12.500</li>
+          </ul>
+          <p><strong>Total:</strong> <span style="color:#FFD700;">$32.400</span></p>
+          <form style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem;">
+            <input type="text" placeholder="Nombre completo" required>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="text" placeholder="Dirección" required>
+            <button class="btn btn-primary">Confirmar Compra</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
     <!-- Presupuesto -->
     <section class="section" id="presupuesto">
         <div class="container">
